@@ -3,7 +3,7 @@
 namespace screen{
 
 Field::Field(lv_obj_t *parent, const uint8_t x, const bool iautoInit):
-  autoInit(iautoInit){
+  autoInit(iautoInit), wallDrawn(false), allianceTowerContents(Color::None,Color::None){
 
   obj = lv_obj_create(parent, NULL);
   lv_obj_set_style(obj, &fieldStyle);
@@ -25,6 +25,9 @@ Field::~Field(){
 void Field::clean(){
   lv_obj_clean(obj);
   this->resetVectors();
+
+  wallDrawn = false;
+  allianceTowerContents = {Color::None, Color::None};
 
   if(autoInit){
     this->drawColoredTiles();
@@ -171,6 +174,16 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
     if(towersToDraw[i] == pos){
       towersToDraw.erase(towersToDraw.begin() + i);
       break;
+    }
+  }
+
+  if(!wallDrawn){
+    if(pos == TowerPos::Red){
+      allianceTowerContents.first = contents;
+      return;
+    }else if(pos == TowerPos::Blue){
+      allianceTowerContents.second = contents;
+      return;
     }
   }
 
@@ -387,6 +400,11 @@ void Field::reinforcePerimeter(){
   lv_obj_set_style(perimeter, &perimeterStyle);
   lv_obj_set_size(perimeter, 240, 240);
   lv_obj_set_pos(perimeter, 0, 0);
+
+  wallDrawn = true;
+
+  drawTower(TowerPos::Red, allianceTowerContents.first);
+  drawTower(TowerPos::Blue, allianceTowerContents.second);
 }
 
 void Field::drawRobot(const bool red, const uint8_t pos){

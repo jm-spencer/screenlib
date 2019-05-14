@@ -114,6 +114,9 @@ class Field{
 
   bool autoInit;
 
+  bool wallDrawn;
+  std::pair<Color, Color> allianceTowerContents;
+
   std::vector<CubeSector> cubesToDraw;
   std::vector<TowerPos> towersToDraw;
   std::vector<ZonePos> zonesToDraw;
