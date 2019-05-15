@@ -72,20 +72,20 @@ void initializeStyles();
  * Various enums for more readable parameters
  */
 
-enum class Color{
-  None, Orange, Green, Purple
+enum class color{
+  none, orange, green, purple
 };
 
-enum class CubeSector{
-  FarLeft, FarRight, FarPurple, Left1, Left2, Left3, Left4, Right1, Right2, Right3, Right4, Near
+enum class cubeSector{
+  farLeft, farRight, farPurple, left1, left2, left3, left4, right1, right2, right3, right4, near
 };
 
-enum class TowerPos{
-  Left, Right, Center, Far, Near, Red, Blue
+enum class towerPos{
+  left, right, center, far, near, red, blue
 };
 
-enum class ZonePos{
-  FarRed, FarBlue, NearRed, NearBlue
+enum class zonePos{
+  farRed, farBlue, nearRed, nearBlue
 };
 
 }//namespace screen

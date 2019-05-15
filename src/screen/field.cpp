@@ -3,18 +3,18 @@
 namespace screen{
 
 Field::Field(lv_obj_t *parent, const uint8_t x, const bool iautoInit):
-  autoInit(iautoInit), wallDrawn(false), allianceTowerContents(Color::None,Color::None){
+  autoInit(iautoInit), wallDrawn(false), allianceTowerContents(color::none,color::none){
 
   obj = lv_obj_create(parent, NULL);
   lv_obj_set_style(obj, &fieldStyle);
   lv_obj_set_size(obj, 240, 240);
   lv_obj_set_pos(obj, x, 0);
 
-  this->resetVectors();
+  resetVectors();
 
   if(autoInit){
-    this->drawColoredTiles();
-    this->drawLines();
+    drawcoloredTiles();
+    drawLines();
   }
 }
 
@@ -24,14 +24,14 @@ Field::~Field(){
 
 void Field::clean(){
   lv_obj_clean(obj);
-  this->resetVectors();
+  resetVectors();
 
   wallDrawn = false;
-  allianceTowerContents = {Color::None, Color::None};
+  allianceTowerContents = {color::none, color::none};
 
   if(autoInit){
-    this->drawColoredTiles();
-    this->drawLines();
+    drawcoloredTiles();
+    drawLines();
   }
 }
 
@@ -39,7 +39,7 @@ void Field::setX(uint8_t x){
   lv_obj_set_x(obj, x);
 }
 
-void Field::drawCubeGroup(const CubeSector pos, const uint8_t presence){
+void Field::drawCubeGroup(const cubeSector pos, const uint8_t presence){
   bool targeted = presence != UINT8_MAX;
 
   for(int i = 0; i < cubesToDraw.size(); i++){
@@ -50,125 +50,125 @@ void Field::drawCubeGroup(const CubeSector pos, const uint8_t presence){
   }
 
   switch(pos){
-    case CubeSector::FarLeft:
+    case cubeSector::farLeft:
       if(presence & 0b11100001){
-        drawCube({40, 30}, Color::Orange, 1, targeted);
+        drawCube({40, 30}, color::orange, 1, targeted);
       }
       if(presence & 0b11100010){
-        drawCube({40, 70}, Color::Orange, 1, targeted);
+        drawCube({40, 70}, color::orange, 1, targeted);
       }
       break;
-    case CubeSector::FarRight:
+    case cubeSector::farRight:
       if(presence & 0b11100001){
-        drawCube({190, 30}, Color::Green, 1, targeted);
+        drawCube({190, 30}, color::green, 1, targeted);
       }
       if(presence & 0b11100010){
-        drawCube({190, 70}, Color::Green, 1, targeted);
+        drawCube({190, 70}, color::green, 1, targeted);
       }
       break;
-    case CubeSector::FarPurple:
+    case cubeSector::farPurple:
       if(presence){
-        drawCube({115, 3}, Color::Purple, 1, targeted);
+        drawCube({115, 3}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Left1:
+    case cubeSector::left1:
       if(presence){
-        drawCube({80, 70}, (presence >= 8 ? Color::Orange : (presence >= 2 ? Color::Green : Color::Purple)), numOfBits[presence & 0b00001111], targeted);
+        drawCube({80, 70}, (presence >= 8 ? color::orange : (presence >= 2 ? color::green : color::purple)), numOfBits[presence & 0b00001111], targeted);
       }
       break;
-    case CubeSector::Left2:
+    case cubeSector::left2:
       if(presence & 0b11101110){
-        drawCube({80, 110}, (presence >= 8 ? Color::Orange : Color::Green), numOfBits[presence & 0b00001110], targeted);
+        drawCube({80, 110}, (presence >= 8 ? color::orange : color::green), numOfBits[presence & 0b00001110], targeted);
       }
       if(presence & 0b11100001){
-        drawCube({70, 110}, Color::Purple, 1, targeted);
+        drawCube({70, 110}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Left3:
+    case cubeSector::left3:
       if(presence & 0b11101100){
-        drawCube({80, 150}, (presence >= 8 ? Color::Orange : Color::Green), numOfBits[presence & 0b00001100], targeted);
+        drawCube({80, 150}, (presence >= 8 ? color::orange : color::green), numOfBits[presence & 0b00001100], targeted);
       }
       if(presence & 0b11100010){
-        drawCube({70, 150}, Color::Green, 1, targeted);
+        drawCube({70, 150}, color::green, 1, targeted);
       }
       if(presence & 0b11100001){
-        drawCube({60, 150}, Color::Purple, 1, targeted);
+        drawCube({60, 150}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Left4:
+    case cubeSector::left4:
       if(presence & 0b11101000){
-        drawCube({80, 190}, Color::Orange, 1, targeted);
+        drawCube({80, 190}, color::orange, 1, targeted);
       }
       if(presence & 0b11100100){
-        drawCube({70, 190}, Color::Green, 1, targeted);
+        drawCube({70, 190}, color::green, 1, targeted);
       }
       if(presence & 0b11100010){
-        drawCube({60, 190}, Color::Green, 1, targeted);
+        drawCube({60, 190}, color::green, 1, targeted);
       }
       if(presence & 0b11100001){
-        drawCube({50, 190}, Color::Purple, 1, targeted);
+        drawCube({50, 190}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Right1:
+    case cubeSector::right1:
       if(presence){
-        drawCube({150, 70}, (presence >= 8 ? Color::Green : (presence >= 2 ? Color::Orange : Color::Purple)), numOfBits[presence & 0b00001111], targeted);
+        drawCube({150, 70}, (presence >= 8 ? color::green : (presence >= 2 ? color::orange : color::purple)), numOfBits[presence & 0b00001111], targeted);
       }
       break;
-    case CubeSector::Right2:
+    case cubeSector::right2:
       if(presence & 0b11101110){
-        drawCube({150, 110}, (presence >= 8 ? Color::Green : Color::Orange), numOfBits[presence & 0b00001110], targeted);
+        drawCube({150, 110}, (presence >= 8 ? color::green : color::orange), numOfBits[presence & 0b00001110], targeted);
       }
       if(presence & 0b11100001){
-        drawCube({160, 110}, Color::Purple, 1, targeted);
+        drawCube({160, 110}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Right3:
+    case cubeSector::right3:
       if(presence & 0b11101100){
-        drawCube({150, 150}, (presence >= 8 ? Color::Green : Color::Orange), numOfBits[presence & 0b00001100], targeted);
+        drawCube({150, 150}, (presence >= 8 ? color::green : color::orange), numOfBits[presence & 0b00001100], targeted);
       }
       if(presence & 0b11100010){
-        drawCube({160, 150}, Color::Orange, 1, targeted);
+        drawCube({160, 150}, color::orange, 1, targeted);
       }
       if(presence & 0b11100001){
-        drawCube({170, 150}, Color::Purple, 1, targeted);
+        drawCube({170, 150}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Right4:
+    case cubeSector::right4:
       if(presence & 0b11101000){
-        drawCube({150, 190}, Color::Green, 1, targeted);
+        drawCube({150, 190}, color::green, 1, targeted);
       }
       if(presence & 0b11100100){
-        drawCube({160, 190}, Color::Orange, 1, targeted);
+        drawCube({160, 190}, color::orange, 1, targeted);
       }
       if(presence & 0b11100010){
-        drawCube({170, 190}, Color::Orange, 1, targeted);
+        drawCube({170, 190}, color::orange, 1, targeted);
       }
       if(presence & 0b11100001){
-        drawCube({180, 190}, Color::Purple, 1, targeted);
+        drawCube({180, 190}, color::purple, 1, targeted);
       }
       break;
-    case CubeSector::Near:
+    case cubeSector::near:
       if(presence & 0b11110000){
-        drawCube({115, 222}, Color::Purple, 1, targeted);
+        drawCube({115, 222}, color::purple, 1, targeted);
       }
       if(presence & 0b11101000){
-        drawCube({120, 227}, Color::Orange, 1, targeted);
+        drawCube({120, 227}, color::orange, 1, targeted);
       }
       if(presence & 0b11100100){
-        drawCube({120, 217}, Color::Orange, 1, targeted);
+        drawCube({120, 217}, color::orange, 1, targeted);
       }
       if(presence & 0b11100010){
-        drawCube({110, 227}, Color::Green, 1, targeted);
+        drawCube({110, 227}, color::green, 1, targeted);
       }
       if(presence & 0b11100001){
-        drawCube({110, 217}, Color::Green, 1, targeted);
+        drawCube({110, 217}, color::green, 1, targeted);
       }
 
       break;
   }
 }
 
-void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cubePresence){
+void Field::drawTower(const towerPos pos, const color contents, const uint8_t cubePresence){
   bool targeted = cubePresence != UINT8_MAX;
 
   for(int i = 0; i < towersToDraw.size(); i++){
@@ -181,10 +181,10 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
   //alliance towers shouldn't be drawn until after the border is drawn;
   //store the value and print later unless the border is already drawn
   if(!wallDrawn){
-    if(pos == TowerPos::Red){
+    if(pos == towerPos::red){
       allianceTowerContents.first = contents;
       return;
-    }else if(pos == TowerPos::Blue){
+    }else if(pos == towerPos::blue){
       allianceTowerContents.second = contents;
       return;
     }
@@ -194,99 +194,99 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
   lv_obj_set_size(tower, 16, 16);
 
   switch(pos){
-    case TowerPos::Left:
+    case towerPos::left:
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, 32, 112);
 
       drawCube(tower, {3, 3}, contents, 1, true);
 
       if(cubePresence & 0b11111000){
-        drawCube({35, 101}, Color::Purple, 1, targeted);
+        drawCube({35, 101}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110010){
-        drawCube({35, 129}, Color::Purple, 1, targeted);
+        drawCube({35, 129}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110001){
-        drawCube({21, 115}, Color::Orange, 1, targeted);
+        drawCube({21, 115}, color::orange, 1, targeted);
       }
       break;
-    case TowerPos::Right:
+    case towerPos::right:
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, 192, 112);
 
       drawCube(tower, {3, 3}, contents, 1, true);
 
       if(cubePresence & 0b11111000){
-        drawCube({195, 101}, Color::Purple, 1, targeted);
+        drawCube({195, 101}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110100){
-        drawCube({209, 115}, Color::Green, 1, targeted);
+        drawCube({209, 115}, color::green, 1, targeted);
       }
       if(cubePresence & 0b11110010){
-        drawCube({195, 129}, Color::Purple, 1, targeted);
+        drawCube({195, 129}, color::purple, 1, targeted);
       }
       break;
-    case TowerPos::Center:
+    case towerPos::center:
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, 112, 112);
 
       drawCube(tower, {3, 3}, contents, 1, true);
       if(cubePresence & 0b11111000){
-        drawCube({115, 101}, Color::Purple, 1, targeted);
+        drawCube({115, 101}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110100){
-        drawCube({129, 115}, Color::Green, 1, targeted);
+        drawCube({129, 115}, color::green, 1, targeted);
       }
       if(cubePresence & 0b11110010){
-        drawCube({115, 129}, Color::Purple, 1, targeted);
+        drawCube({115, 129}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110001){
-        drawCube({101, 115}, Color::Orange, 1, targeted);
+        drawCube({101, 115}, color::orange, 1, targeted);
       }
       break;
-    case TowerPos::Far:
+    case towerPos::far:
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, 112, 52);
 
       drawCube(tower, {3, 3}, contents, 1, true);
       if(cubePresence & 0b11111000){
-        drawCube({115, 41}, Color::Purple, 1, targeted);
+        drawCube({115, 41}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110100){
-        drawCube({129, 55}, Color::Green, 1, targeted);
+        drawCube({129, 55}, color::green, 1, targeted);
       }
       if(cubePresence & 0b11110010){
-        drawCube({115, 69}, Color::Purple, 1, targeted);
+        drawCube({115, 69}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110001){
-        drawCube({101, 55}, Color::Orange, 1, targeted);
+        drawCube({101, 55}, color::orange, 1, targeted);
       }
       break;
-    case TowerPos::Near:
+    case towerPos::near:
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, 112, 172);
 
       drawCube(tower, {3, 3}, contents, 1, true);
       if(cubePresence & 0b11111000){
-        drawCube({115, 161}, Color::Purple, 1, targeted);
+        drawCube({115, 161}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110100){
-        drawCube({129, 175}, Color::Green, 1, targeted);
+        drawCube({129, 175}, color::green, 1, targeted);
       }
       if(cubePresence & 0b11110010){
-        drawCube({115, 189}, Color::Purple, 1, targeted);
+        drawCube({115, 189}, color::purple, 1, targeted);
       }
       if(cubePresence & 0b11110001){
-        drawCube({101, 175}, Color::Orange, 1, targeted);
+        drawCube({101, 175}, color::orange, 1, targeted);
       }
       break;
-    case TowerPos::Red:
+    case towerPos::red:
       lv_obj_set_style(tower, &redTower);
       lv_obj_set_pos(tower, 54, 228);
 
       drawCube(tower, {3, 3}, contents, 1, true);
       break;
-    case TowerPos::Blue:
+    case towerPos::blue:
       lv_obj_set_style(tower, &blueTower);
       lv_obj_set_pos(tower, 174, 228);
 
@@ -295,12 +295,12 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
   }
 }
 
-void Field::drawScoringZone(const ZonePos pos, const Color contents, const uint8_t stackHeight){
-   drawScoringZone(pos, {contents, Color::None}, {stackHeight, 0});
+void Field::drawScoringZone(const zonePos pos, const color contents, const uint8_t stackHeight){
+   drawScoringZone(pos, {contents, color::none}, {stackHeight, 0});
 }
 
-void Field::drawScoringZone(const ZonePos pos, const std::pair<Color,Color> contents, const std::pair<uint8_t,uint8_t> stackHeight){
-  bool targeted = contents.first != Color::None;
+void Field::drawScoringZone(const zonePos pos, const std::pair<color,color> contents, const std::pair<uint8_t,uint8_t> stackHeight){
+  bool targeted = contents.first != color::none;
 
   for(int i = 0; i < zonesToDraw.size(); i++){
     if(zonesToDraw[i] == pos){
@@ -312,7 +312,7 @@ void Field::drawScoringZone(const ZonePos pos, const std::pair<Color,Color> cont
   lv_obj_t* zone = lv_obj_create(obj, NULL);
 
   switch(pos){
-    case ZonePos::FarRed:
+    case zonePos::farRed:
       lv_obj_set_style(zone, targeted ? &redZoneHighlighted : &redZone);
       lv_obj_set_size(zone, 29, 20);
       lv_obj_set_pos(zone, 0, 0);
@@ -322,7 +322,7 @@ void Field::drawScoringZone(const ZonePos pos, const std::pair<Color,Color> cont
         drawCube(zone, {15, 5}, contents.second, stackHeight.second, false);
       }
       break;
-    case ZonePos::FarBlue:
+    case zonePos::farBlue:
       lv_obj_set_style(zone, targeted ? &blueZoneHighlighted : &blueZone);
       lv_obj_set_size(zone, 29, 20);
       lv_obj_set_pos(zone, 211, 0);
@@ -332,7 +332,7 @@ void Field::drawScoringZone(const ZonePos pos, const std::pair<Color,Color> cont
         drawCube(zone, {4, 5}, contents.second, stackHeight.second, false);
       }
       break;
-    case ZonePos::NearRed:
+    case zonePos::nearRed:
       lv_obj_set_style(zone, targeted ? &redZoneHighlighted : &redZone);
       lv_obj_set_size(zone, 20, 20);
       lv_obj_set_pos(zone, 0, 220);
@@ -341,7 +341,7 @@ void Field::drawScoringZone(const ZonePos pos, const std::pair<Color,Color> cont
         drawCube(zone, {5, 5}, contents.first, stackHeight.first, false);
       }
       break;
-    case ZonePos::NearBlue:
+    case zonePos::nearBlue:
       lv_obj_set_style(zone, targeted ? &blueZoneHighlighted : &blueZone);
       lv_obj_set_size(zone, 20, 20);
       lv_obj_set_pos(zone, 220, 220);
@@ -353,11 +353,11 @@ void Field::drawScoringZone(const ZonePos pos, const std::pair<Color,Color> cont
   }
 
   if(!zonesToDraw.size()){
-    this->reinforcePerimeter();
+    reinforcePerimeter();
   }
 }
 
-void Field::drawColoredTiles(){
+void Field::drawcoloredTiles(){
   lv_obj_t* redLeft1 = lv_obj_create(obj, NULL);
   lv_obj_set_style(redLeft1, &redAlliance);
   lv_obj_set_size(redLeft1, 40, 40);
@@ -406,8 +406,8 @@ void Field::reinforcePerimeter(){
 
   wallDrawn = true;
 
-  if(allianceTowerContents.first != Color::None) drawTower(TowerPos::Red, allianceTowerContents.first);
-  if(allianceTowerContents.second != Color::None) drawTower(TowerPos::Blue, allianceTowerContents.second);
+  if(allianceTowerContents.first != color::none) drawTower(towerPos::red, allianceTowerContents.first);
+  if(allianceTowerContents.second != color::none) drawTower(towerPos::blue, allianceTowerContents.second);
 }
 
 void Field::drawRobot(const bool red, const uint8_t pos){
@@ -431,16 +431,16 @@ void Field::finishDrawing(){
   }
 }
 
-void Field::drawCube(const std::pair<uint8_t, uint8_t> pos, const Color color, const uint8_t stackHeight, const bool targeted){
+void Field::drawCube(const std::pair<uint8_t, uint8_t> pos, const color color, const uint8_t stackHeight, const bool targeted){
   drawCube(obj, pos, color, stackHeight, targeted);
 }
 
-void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, const Color color, const uint8_t stackHeight, const bool targeted){
-  if(color == Color::None) return;
+void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, const color color, const uint8_t stackHeight, const bool targeted){
+  if(color == color::none) return;
 
   lv_obj_t* cube = lv_obj_create(parent, NULL);
-  lv_obj_set_style(cube, (color == Color::Orange ? (targeted ? &orangeStyleHighlighted : &orangeStyle) :
-                          color == Color::Green  ? (targeted ? &greenStyleHighlighted  : &greenStyle ) :
+  lv_obj_set_style(cube, (color == color::orange ? (targeted ? &orangeStyleHighlighted : &orangeStyle) :
+                          color == color::green  ? (targeted ? &greenStyleHighlighted  : &greenStyle ) :
                                                    (targeted ? &purpleStyleHighlighted : &purpleStyle)));
   lv_obj_set_pos(cube, pos.first, pos.second);
   lv_obj_set_size(cube, 10, 10);
@@ -456,9 +456,9 @@ void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, co
 
 void Field::resetVectors(){
   //fully occupy
-  cubesToDraw = {CubeSector::FarLeft, CubeSector::FarRight, CubeSector::FarPurple, CubeSector::Left1, CubeSector::Left2, CubeSector::Left3, CubeSector::Left4, CubeSector::Right1, CubeSector::Right2, CubeSector::Right3, CubeSector::Right4, CubeSector::Near};
-  towersToDraw = {TowerPos::Left, TowerPos::Right, TowerPos::Center, TowerPos::Far, TowerPos::Near, TowerPos::Red, TowerPos::Blue};
-  zonesToDraw = {ZonePos::FarRed, ZonePos::FarBlue, ZonePos::NearRed, ZonePos::NearBlue};
+  cubesToDraw = {cubeSector::farLeft, cubeSector::farRight, cubeSector::farPurple, cubeSector::left1, cubeSector::left2, cubeSector::left3, cubeSector::left4, cubeSector::right1, cubeSector::right2, cubeSector::right3, cubeSector::right4, cubeSector::near};
+  towersToDraw = {towerPos::left, towerPos::right, towerPos::center, towerPos::far, towerPos::near, towerPos::red, towerPos::blue};
+  zonesToDraw = {zonePos::farRed, zonePos::farBlue, zonePos::nearRed, zonePos::nearBlue};
 }
 
 }//namespace screen
