@@ -3,6 +3,26 @@
 #include "screen/resources.hpp"
 #include <vector>
 
+#define TOWER_CUBE_FAR 8
+#define TOWER_CUBE_RIGHT 4
+#define TOWER_CUBE_NEAR 2
+#define TOWER_CUBE_LEFT 1
+
+#define CUBE_HIGHEST 8
+#define CUBE_2HIGHEST 4
+#define CUBE_2LOWEST 2
+#define CUBE_LOWEST 1
+
+#define CUBE_FAR 2
+#define CUBE_NEAR 1
+
+#define CUBE_TOP_NEAR 16
+#define CUBE_NEAR_RIGHT 8
+#define CUBE_FAR_RIGHT 4
+#define CUBE_NEAR_LEFT 2
+#define CUBE_FAR_LEFT 1
+
+
 namespace screen{
 
 class Field{

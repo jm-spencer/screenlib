@@ -148,21 +148,22 @@ void Field::drawCubeGroup(const CubeSector pos, const uint8_t presence){
       }
       break;
     case CubeSector::Near:
-      if(presence & 0b11100001){
-        drawCube({110, 217}, Color::Green, 1, targeted);
-      }
-      if(presence & 0b11100010){
-        drawCube({110, 227}, Color::Green, 1, targeted);
-      }
-      if(presence & 0b11100100){
-        drawCube({120, 217}, Color::Orange, 1, targeted);
+      if(presence & 0b11110000){
+        drawCube({115, 222}, Color::Purple, 1, targeted);
       }
       if(presence & 0b11101000){
         drawCube({120, 227}, Color::Orange, 1, targeted);
       }
-      if(presence & 0b11110000){
-        drawCube({115, 222}, Color::Purple, 1, targeted);
+      if(presence & 0b11100100){
+        drawCube({120, 217}, Color::Orange, 1, targeted);
       }
+      if(presence & 0b11100010){
+        drawCube({110, 227}, Color::Green, 1, targeted);
+      }
+      if(presence & 0b11100001){
+        drawCube({110, 217}, Color::Green, 1, targeted);
+      }
+
       break;
   }
 }
@@ -177,6 +178,8 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
     }
   }
 
+  //alliance towers shouldn't be drawn until after the border is drawn;
+  //store the value and print later unless the border is already drawn
   if(!wallDrawn){
     if(pos == TowerPos::Red){
       allianceTowerContents.first = contents;
@@ -197,7 +200,7 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
 
       drawCube(tower, {3, 3}, contents, 1, true);
 
-      if(cubePresence & 0b11110100){
+      if(cubePresence & 0b11111000){
         drawCube({35, 101}, Color::Purple, 1, targeted);
       }
       if(cubePresence & 0b11110010){
@@ -213,13 +216,13 @@ void Field::drawTower(const TowerPos pos, const Color contents, const uint8_t cu
 
       drawCube(tower, {3, 3}, contents, 1, true);
 
-      if(cubePresence & 0b11110100){
+      if(cubePresence & 0b11111000){
         drawCube({195, 101}, Color::Purple, 1, targeted);
       }
-      if(cubePresence & 0b11110010){
+      if(cubePresence & 0b11110100){
         drawCube({209, 115}, Color::Green, 1, targeted);
       }
-      if(cubePresence & 0b11110001){
+      if(cubePresence & 0b11110010){
         drawCube({195, 129}, Color::Purple, 1, targeted);
       }
       break;
@@ -403,8 +406,8 @@ void Field::reinforcePerimeter(){
 
   wallDrawn = true;
 
-  drawTower(TowerPos::Red, allianceTowerContents.first);
-  drawTower(TowerPos::Blue, allianceTowerContents.second);
+  if(allianceTowerContents.first != Color::None) drawTower(TowerPos::Red, allianceTowerContents.first);
+  if(allianceTowerContents.second != Color::None) drawTower(TowerPos::Blue, allianceTowerContents.second);
 }
 
 void Field::drawRobot(const bool red, const uint8_t pos){
