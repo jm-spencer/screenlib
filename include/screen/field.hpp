@@ -1,7 +1,7 @@
 #ifndef SCREEN_FIELD_HPP_
 #define SCREEN_FIELD_HPP_
-#include "screen/resources.hpp"
 #include <vector>
+#include "screen/resources.hpp"
 
 #define TOWER_CUBE_FAR 8
 #define TOWER_CUBE_RIGHT 4
@@ -22,11 +22,10 @@
 #define CUBE_NEAR_LEFT 2
 #define CUBE_FAR_LEFT 1
 
+namespace screen {
 
-namespace screen{
-
-class Field{
-  public:
+class Field {
+ public:
   /**
    * Field generator for the screen
    *
@@ -85,7 +84,8 @@ class Field{
    * @param stackHeight how many cubes are in the zone vertically (puts number on top)
    *    for both stacks
    */
-  void drawScoringZone(zonePos pos, std::pair<color,color> contents, std::pair<uint8_t,uint8_t> stackHeight);
+  void drawScoringZone(zonePos pos, std::pair<color, color> contents,
+                       std::pair<uint8_t, uint8_t> stackHeight);
 
   /**
    * draw the four colored tiles
@@ -120,15 +120,16 @@ class Field{
    */
   void finishDrawing();
 
-  private:
-  //Do not try and draw cubes youself, use the above functions
+ private:
+  // Do not try and draw cubes youself, use the above functions
   void drawCube(std::pair<uint8_t, uint8_t> pos, color color, uint8_t stackHeight, bool targeted);
-  static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, color color, uint8_t stackHeight, bool targeted);
+
+  static void drawCube(lv_obj_t* parent, std::pair<uint8_t, uint8_t> pos, color color,
+                       uint8_t stackHeight, bool targeted);
 
   void resetVectors();
 
-  const uint numOfBits[16] = {0,1,1,2,1,2,2,3,
-                              1,2,2,3,2,3,3,4};
+  const uint numOfBits[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
 
   lv_obj_t *obj;
 
@@ -142,6 +143,6 @@ class Field{
   std::vector<zonePos> zonesToDraw;
 };
 
-}//namespace screen
+}  // namespace screen
 
 #endif
