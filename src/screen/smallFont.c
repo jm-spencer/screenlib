@@ -4,6 +4,10 @@
 /***********************************************************************************
  * synchronizer_nbp.ttf 7 px Font in U+0030 (0) .. U+0039 (9)  range with 1 bpp
  * Sparse font with only these characters: 0123456789
+ *
+ * font by total FontGeek DTF, Ltd. - https://www.fontspace.com/total-fontgeek-dtf-ltd/synchronizer-nbp
+ * converted by the lvgl font converter - https://littlevgl.com/ttf-font-to-c-array
+ * all credit to them
 ***********************************************************************************/
 
 /*Store the image of the letters (glyph)*/
