@@ -18,6 +18,8 @@ Usage
 Object drawing is mostly done through a `Field` object, by giving a position enum class and a bitfield of which cubes to print.  
 Most objects on the screen are referred to by `left`, `right`, `near`, and `far` (near refers to the bottom of the screen while far refers to the top)
 
+Unscored Cubes
+--------------
 An example of this is:  
 `field.drawCubeGroup(screen::cubeSector::right4, 0b00001010);`
 
@@ -48,3 +50,14 @@ As the 4 cube stacks on the left and right are in the same order but slightly di
 `CUBE_TOP_NEAR`, `CUBE_FAR_LEFT`, `CUBE_NEAR_LEFT`, `CUBE_FAR_RIGHT`, and `CUBE_NEAR_RIGHT` are used for the five cube stack on the near side
 
 and finally, all macros starting with `TOWER_CUBE_` refer to the cubes around a tower
+
+Scored Cubes
+------------
+Scored cubes are drawn along with where they are, either in a tower or a scoring zone. In a tower the second parameter describes the color of the cube,
+(`screen::color::`). In a scoring zone the second parameter does the same however, two colors can be placed in an array to denote two stacks. In addition,
+a third parameter is used to display "stack height", a number printed on top to describe how many cubes are in the stack.  
+Note: use `screen::color::none` to abstain from printing a scored cube in that position
+
+Example
+-------
+inside `opcontrol()` in `scr/opcontrol.cpp` is a usage example (it produces the image at the top of this page)
