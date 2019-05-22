@@ -13,6 +13,16 @@ Installing
 * run `prosv5 c fetch screenlib@VERSION.zip`, replacing VERSION with the version
 * run `prosv5 c apply screenlib` in your project directory to install
 
+Version
+=======
+The first digit refers to the vex game: Tower Takeover will be version 1.X.X, while next year's game will be 2.X.X
+The second digit refers to any new features that may be added.
+The third digit refers to any bug fixes.
+
+License
+=======
+This software uses the MIT License. See [LICENSE](LICENSE) for more information.
+
 Usage
 =====
 Object drawing is mostly done through a `Field` object, by giving a position enum class and a bitfield of which cubes to print.  
@@ -61,3 +71,8 @@ Note: use `screen::color::none` to abstain from printing a scored cube in that p
 Example
 -------
 inside `opcontrol()` in `scr/opcontrol.cpp` is a usage example (it produces the image at the top of this page)
+
+Acknowledgements
+================
+Just going to list anyone who has or will give advice for this
+
