@@ -15,9 +15,9 @@ Installing
 
 Version
 =======
-The first digit refers to the vex game: Tower Takeover will be version 1.X.X, while next year's game will be 2.X.X
-The second digit refers to any new features that may be added.
-The third digit refers to any bug fixes.
+The first digit refers to the vex game: Tower Takeover will be version 1.X.X, while next year's game will be 2.X.X  
+The second digit refers to any new features that may be added.  
+The third digit refers to any bug fixes.  
 
 License
 =======
