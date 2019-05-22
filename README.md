@@ -76,4 +76,6 @@ inside `opcontrol()` in `scr/opcontrol.cpp` is a usage example (it produces the 
 
 Acknowledgements
 ================
+smallfont.c is converted version of the digits 0-9 from [Synchronizer NBP Font](https://www.fontspace.com/total-fontgeek-dtf-ltd/synchronizer-nbp) by total FontGeek DTF, Ltd. all credit regarding the font to them.
+
 Thanks to Hotel from the PROS team, Salmon from Okapilib, and Theo from 7842F, for giving some advice on improving the code here
