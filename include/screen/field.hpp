@@ -22,8 +22,6 @@
 #define CUBE_NEAR_LEFT 2
 #define CUBE_FAR_LEFT 1
 
-namespace screen {
-
 /**
  * See Field.png on https://github.com/SpencerJ21/screenlib
  *
@@ -67,6 +65,8 @@ namespace screen {
  * printing a scored cube in that position
  */
 
+namespace screen {
+
 class Field {
  public:
   /**
@@ -80,7 +80,7 @@ class Field {
   ~Field();
 
   /**
-   * Remove all objects from the field
+   * Remove all objects from the field, and reset to default
    */
   void clean();
 
@@ -97,7 +97,7 @@ class Field {
    *
    * @param pos which group of cubes to print - see resources.hpp
    * @param presence a bitfield of present cubes. Starts at highest cube as the highest bit,
-   *    or furthest, or leftmost, depending on which group
+   *    or furthest, or leftmost, depending on which group. See the README for more information
    */
   void drawCubeGroup(cubeSector pos, uint8_t presence = UINT8_MAX);
 
@@ -107,6 +107,7 @@ class Field {
    * @param pos which tower to print - see resources.hpp
    * @param contents what color cube is inside, set color::none for no cube
    * @param presence a bitfield of present cubes. Starts with furthest and moves clockwise
+   *    See the README for more information
    */
   void drawTower(towerPos pos, color contents = color::none, uint8_t cubePresence = UINT8_MAX);
 
@@ -116,6 +117,7 @@ class Field {
    * @param pos which zone to print
    * @param contents what color cube is inside, set color::none for no cube
    * @param stackHeight how many cubes are in the zone vertically (puts number on top)
+   *    See the README for more information
    */
   void drawScoringZone(zonePos pos, color contents = color::none, uint8_t stackHeight = 0);
 
@@ -125,23 +127,30 @@ class Field {
    * @param pos which zone to print
    * @param contents what colors of cubes are inside, use other function for 0 or 1 cubes
    * @param stackHeight how many cubes are in the zone vertically (puts number on top)
-   *    for both stacks
+   *    for both stacks. See the README for more information
    */
   void drawScoringZone(zonePos pos, std::pair<color, color> contents,
                        std::pair<uint8_t, uint8_t> stackHeight);
 
   /**
    * draw the four colored tiles
+   *
+   * called automatically by default
    */
   void drawcoloredTiles();
 
   /**
    * draw the zone lines
+   *
+   * called automatically by default
    */
   void drawLines();
 
   /**
    * re-print the perimeter to make it look nice
+   *
+   * called automatically assuming you are drawing the whole field
+   * calling this manually is not advised
    *
    * note: should be called after drawcoloredTiles(), drawLines(), and drawScoringZone()s,
    * but before drawtowers()s
@@ -160,11 +169,14 @@ class Field {
   /**
    * to be called after drawing all towers, cubes, and scoring zones
    * this will automatically print all other game elements
+   *
+   * this is the suggested way to finish the field, as it will ensure everything is drawn in the
+   * correct order
    */
   void finishDrawing();
 
  private:
-  // Do not try and draw cubes youself, use the above functions
+  // Cubes should be drawn automatically by the above functions
   void drawCube(std::pair<uint8_t, uint8_t> pos, color color, uint8_t stackHeight, bool targeted);
 
   static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, color color,

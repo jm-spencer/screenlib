@@ -35,9 +35,9 @@ An example of this is:
 
 Let's take a look at how the field is represented
 ![alt text](./Field.png "Labeled Field")
-Each of the cube group names are in `screen::cubeSector`,  
-each of the tower names are in `screen::towerPos`, and  
-each of the scoring zone names are in `screen::zonePos`
+Each of the cube group names are in `screen::cubeSector`, and are drawn with `drawCubeGroup`  
+each of the tower names are in `screen::towerPos`, and are drawn with `drawTower`, and  
+each of the scoring zone names are in `screen::zonePos`, and are drawn with `drawScoringZone`  
 
 The numbers on the cube show the bit that represents them in their bitfield:  
 a 0 means it's looking at bit 0: `0b0000000X`  
@@ -75,4 +75,3 @@ inside `opcontrol()` in `scr/opcontrol.cpp` is a usage example (it produces the 
 Acknowledgements
 ================
 Just going to list anyone who has or will give advice for this
-
