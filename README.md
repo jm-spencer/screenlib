@@ -28,6 +28,8 @@ Usage
 Object drawing is mostly done through a `Field` object, by giving a position enum class and a bitfield of which cubes to print.  
 Most objects on the screen are referred to by `left`, `right`, `near`, and `far` (near refers to the bottom of the screen while far refers to the top)
 
+**Make sure initializeStyles() is called during initialization**
+
 Unscored Cubes
 --------------
 An example of this is:  
@@ -74,4 +76,4 @@ inside `opcontrol()` in `scr/opcontrol.cpp` is a usage example (it produces the 
 
 Acknowledgements
 ================
-Just going to list anyone who has or will give advice for this
+Thanks to Hotel from the PROS team, Salmon from Okapilib, and Theo from 7842F, for giving some advice on improving the code here
