@@ -74,7 +74,7 @@ void initializeStyles();
 
 enum class color { none, orange, green, purple };
 
-enum class cubeSector {
+enum class cubeGroup {
   farLeft,
   farRight,
   farPurple,
@@ -89,9 +89,9 @@ enum class cubeSector {
   near
 };
 
-enum class towerPos { left, right, center, far, near, red, blue };
+enum class tower { left, right, center, far, near, red, blue };
 
-enum class zonePos { farRed, farBlue, nearRed, nearBlue };
+enum class scoringZone { farRed, farBlue, nearRed, nearBlue };
 
 }  // namespace screen
 

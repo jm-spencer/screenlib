@@ -25,31 +25,31 @@
 /**
  * See Field.png on https://github.com/SpencerJ21/screenlib
  *
- * Each of the cube group names are in screen::cubeSector,
- * each of the tower names are in screen::towerPos, and
- * each of the scoring zone names are in screen::zonePos
+ * Each of the cube group names are in screen::cubeGroup,
+ * each of the tower names are in screen::tower, and
+ * each of the scoring zone names are in screen::scoringZone
  *
  * The numbers on the cube show the bit that represents them in their bitfield:
- * a 0 means it's looking at bit 0: 0b0000000X
- * a 1 means it's looking at bit 1: 0b000000X0
+ * a 0 means it's looking at bit 0: 0b0000X
+ * a 1 means it's looking at bit 1: 0b000X0
  * and so on.
  *
  * This is done so the presence of every cube in a group can be given by a number
- * say you want the cubes labeled 3, 1, and 0, the bitfield would be 0b00001011
+ * say you want the cubes labeled 3, 1, and 0, the bitfield would be 0b01011
  *
  * For the stacks near the middle, the cubes in the stack but not on top, are still represented by
  * the bits that follow the top cube's bit (the 3 cubes under a cube on bit 3 are represented by
  * bits 2, 1, and 0)
  *
  * Alternatively, macros can be used for more verbose code; here is the equivalent of the previous
- * example: field.drawCubeGroup(screen::cubeSector::right4, CUBE_HIGHEST + CUBE_2LOWEST);
+ * example: field.draw(screen::cubeGroup::right4, CUBE_HIGHEST + CUBE_2LOWEST);
  *
  * CUBE_HIGHEST represents the highest cube in the stack, followed by CUBE_2HIGHEST (the 2nd
  * highest), followed by CUBE_2LOWEST (the 2nd lowest), and finally CUBE_LOWEST As the 4 cube stacks
  * on the left and right are in the same order but slightly different positions, the corresponding
  * cubes are represented the same (purple to purple, orange to orange, green to green)
  *
- * CUBE_FAR and CUBE_NEAR are for the cube sectors farLeft and farRight
+ * CUBE_FAR and CUBE_NEAR are for the cube Groups farLeft and farRight
  *
  * CUBE_TOP_NEAR, CUBE_FAR_LEFT, CUBE_NEAR_LEFT, CUBE_FAR_RIGHT, and CUBE_NEAR_RIGHT are used for
  * the five cube stack on the near side
@@ -99,7 +99,7 @@ class Field {
    * @param presence a bitfield of present cubes. Starts at highest cube as the highest bit,
    *    or furthest, or leftmost, depending on which group. See the README for more information
    */
-  void drawCubeGroup(cubeSector pos, uint8_t presence = UINT8_MAX);
+  void draw(cubeGroup pos, uint8_t presence = UINT8_MAX);
 
   /**
    * draw a tower and group of cubes around it
@@ -109,7 +109,7 @@ class Field {
    * @param presence a bitfield of present cubes. Starts with furthest and moves clockwise
    *    See the README for more information
    */
-  void drawTower(towerPos pos, color contents = color::none, uint8_t cubePresence = UINT8_MAX);
+  void draw(tower pos, color contents = color::none, uint8_t cubePresence = UINT8_MAX);
 
   /**
    * draw a scoring zone (and cubes inside)
@@ -119,7 +119,7 @@ class Field {
    * @param stackHeight how many cubes are in the zone vertically (puts number on top)
    *    See the README for more information
    */
-  void drawScoringZone(zonePos pos, color contents = color::none, uint8_t stackHeight = 0);
+  void draw(scoringZone pos, color contents = color::none, uint8_t stackHeight = 0);
 
   /**
    * draw a scoring zone (and cubes inside)
@@ -129,7 +129,7 @@ class Field {
    * @param stackHeight how many cubes are in the zone vertically (puts number on top)
    *    for both stacks. See the README for more information
    */
-  void drawScoringZone(zonePos pos, std::pair<color, color> contents,
+  void draw(scoringZone pos, std::pair<color, color> contents,
                        std::pair<uint8_t, uint8_t> stackHeight);
 
   /**
@@ -152,8 +152,8 @@ class Field {
    * called automatically assuming you are drawing the whole field
    * calling this manually is not advised
    *
-   * note: should be called after drawcoloredTiles(), drawLines(), and drawScoringZone()s,
-   * but before drawtowers()s
+   * note: should be called after drawcoloredTiles(), drawLines(), and draw()s,
+   * but before draw()s
    */
   void reinforcePerimeter();
 
@@ -193,9 +193,9 @@ class Field {
   bool wallDrawn;
   std::pair<color, color> allianceTowerContents;
 
-  std::vector<cubeSector> cubesToDraw;
-  std::vector<towerPos> towersToDraw;
-  std::vector<zonePos> zonesToDraw;
+  std::vector<cubeGroup> cubesToDraw;
+  std::vector<tower> towersToDraw;
+  std::vector<scoringZone> zonesToDraw;
 };
 
 }  // namespace screen
