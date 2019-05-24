@@ -8,7 +8,7 @@
 
 extern lv_font_t smallFont;
 
-namespace screen{
+namespace screen {
 
 /**
  * These styles are used for the objects on the field, along with
@@ -72,22 +72,27 @@ void initializeStyles();
  * Various enums for more readable parameters
  */
 
-enum class Color{
-  None, Orange, Green, Purple
+enum class color { none, orange, green, purple };
+
+enum class cubeGroup {
+  farLeft,
+  farRight,
+  farPurple,
+  left1,
+  left2,
+  left3,
+  left4,
+  right1,
+  right2,
+  right3,
+  right4,
+  near
 };
 
-enum class CubeSector{
-  FarLeft, FarRight, FarPurple, Left1, Left2, Left3, Left4, Right1, Right2, Right3, Right4, Near
-};
+enum class tower { left, right, center, far, near, red, blue };
 
-enum class TowerPos{
-  Left, Right, Center, Far, Near, Red, Blue
-};
+enum class scoringZone { farRed, farBlue, nearRed, nearBlue };
 
-enum class ZonePos{
-  FarRed, FarBlue, NearRed, NearBlue
-};
-
-}//namespace screen
+}  // namespace screen
 
 #endif

@@ -1,6 +1,6 @@
 #include "screen/resources.hpp"
 
-namespace screen{
+namespace screen {
 
 lv_style_t blankStyle;
 lv_style_t listStyle;
@@ -34,18 +34,18 @@ lv_style_t blueZone;
 lv_style_t redZoneHighlighted;
 lv_style_t blueZoneHighlighted;
 
-
-void initializeStyles(){
+void initializeStyles()
+{
   lv_style_copy(&blankStyle, &lv_style_plain);
-  blankStyle.body.main_color = LV_COLOR_GRAY;
-  blankStyle.body.grad_color = LV_COLOR_GRAY;
+  blankStyle.body.main_color   = LV_COLOR_GRAY;
+  blankStyle.body.grad_color   = LV_COLOR_GRAY;
   blankStyle.body.border.width = 0;
 
   lv_style_copy(&listStyle, &lv_style_plain);
-  listStyle.body.main_color = LV_COLOR_SILVER;
-  listStyle.body.grad_color = LV_COLOR_SILVER;
+  listStyle.body.main_color   = LV_COLOR_SILVER;
+  listStyle.body.grad_color   = LV_COLOR_SILVER;
   listStyle.body.border.width = 3;
-  listStyle.body.radius = 0;
+  listStyle.body.radius       = 0;
 
   listStyle.body.border.color = LV_COLOR_BLACK;
   listStyle.body.border.width = 3;
@@ -58,8 +58,8 @@ void initializeStyles(){
   perimeterStyle.body.empty = true;
 
   lv_style_copy(&blueAlliance, &fieldStyle);
-  blueAlliance.body.main_color = LV_COLOR_BLUE;
-  blueAlliance.body.grad_color = LV_COLOR_BLUE;
+  blueAlliance.body.main_color   = LV_COLOR_BLUE;
+  blueAlliance.body.grad_color   = LV_COLOR_BLUE;
   blueAlliance.body.border.width = 0;
 
   lv_style_copy(&blueAllianceHighlighted, &blueAlliance);
@@ -77,14 +77,14 @@ void initializeStyles(){
   lv_style_copy(&lineStyle, &lv_style_plain);
   lineStyle.body.main_color = LV_COLOR_WHITE;
   lineStyle.body.grad_color = LV_COLOR_WHITE;
-  lineStyle.line.color = LV_COLOR_WHITE;
-  lineStyle.line.width = 3;
+  lineStyle.line.color      = LV_COLOR_WHITE;
+  lineStyle.line.width      = 3;
 
   lv_style_copy(&whiteText, &lv_style_plain);
-  whiteText.text.color = LV_COLOR_WHITE;
-  whiteText.text.font = &lv_font_dejavu_20;
+  whiteText.text.color        = LV_COLOR_WHITE;
+  whiteText.text.font         = &lv_font_dejavu_20;
   whiteText.text.letter_space = 2;
-  whiteText.text.line_space = 1;
+  whiteText.text.line_space   = 1;
 
   lv_style_copy(&littleWhiteText, &whiteText);
   littleWhiteText.text.font = &::smallFont;
@@ -104,9 +104,9 @@ void initializeStyles(){
   pressedButton.body.grad_color = LV_COLOR_GRAY;
 
   lv_style_copy(&orangeStyle, &lv_style_plain);
-  orangeStyle.body.radius = 0;
-  orangeStyle.body.main_color = LV_COLOR_MAKE(0xFF, 0xA0, 0x00);
-  orangeStyle.body.grad_color = LV_COLOR_MAKE(0xFF, 0xA0, 0x00);
+  orangeStyle.body.radius       = 0;
+  orangeStyle.body.main_color   = LV_COLOR_MAKE(0xFF, 0x80, 0x00);
+  orangeStyle.body.grad_color   = LV_COLOR_MAKE(0xFF, 0x80, 0x00);
   orangeStyle.body.border.color = LV_COLOR_WHITE;
   orangeStyle.body.border.width = 0;
 
@@ -128,11 +128,11 @@ void initializeStyles(){
   purpleStyleHighlighted.body.border.width = 1;
 
   lv_style_copy(&neutralTower, &lv_style_plain);
-  neutralTower.body.main_color = LV_COLOR_GRAY;
-  neutralTower.body.grad_color = LV_COLOR_GRAY;
+  neutralTower.body.main_color   = LV_COLOR_GRAY;
+  neutralTower.body.grad_color   = LV_COLOR_GRAY;
   neutralTower.body.border.color = LV_COLOR_BLACK;
   neutralTower.body.border.width = 2;
-  neutralTower.body.radius = LV_RADIUS_CIRCLE;
+  neutralTower.body.radius       = LV_RADIUS_CIRCLE;
 
   lv_style_copy(&redTower, &neutralTower);
   redTower.body.main_color = LV_COLOR_RED;
@@ -144,7 +144,7 @@ void initializeStyles(){
 
   lv_style_copy(&redZone, &fieldStyle);
   redZone.body.border.width = 3;
-  redZone.body.radius = 3;
+  redZone.body.radius       = 3;
   redZone.body.border.color = LV_COLOR_RED;
 
   lv_style_copy(&redZoneHighlighted, &redZone);
@@ -159,4 +159,4 @@ void initializeStyles(){
   blueZoneHighlighted.body.grad_color = LV_COLOR_WHITE;
 }
 
-}//namespace screen
+}  // namespace screen
