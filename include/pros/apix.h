@@ -12,7 +12,7 @@
  * This file should not be modified by users, since it gets replaced whenever
  * a kernel upgrade occurs.
  *
- * Copyright (c) 2017-2018, Purdue University ACM SIGBots.
+ * Copyright (c) 2017-2019, Purdue University ACM SIGBots.
  * All rights reserved.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -28,8 +28,10 @@
 #pragma GCC diagnostic ignored "-Wall"
 #include "display/lvgl.h"
 #pragma GCC diagnostic pop
+#include "pros/serial.h"
 
 #ifdef __cplusplus
+#include "pros/serial.hpp"
 namespace pros::c {
 extern "C" {
 #endif
@@ -530,6 +532,15 @@ int32_t fdctl(int file, const uint32_t action, void* const extra_arg);
  * NULL) instead
  */
 #define DEVCTL_FIONREAD 16
+
+/**
+ * Action macro to check if there is space available in the Generic Serial
+ * Device's output buffer
+ *
+ * The extra argument is not used with this action, provide any value (e.g.
+ * NULL) instead
+ */
+#define DEVCTL_FIONWRITE 18
 
 /**
  * Action macro to set the Generic Serial Device's baudrate.

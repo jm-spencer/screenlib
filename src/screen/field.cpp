@@ -477,9 +477,8 @@ void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, co
   if (stackHeight > 1) {
     lv_obj_t *cubeLabel = lv_label_create(cube, NULL);
     lv_label_set_style(cubeLabel, &littleWhiteText);
-    lv_obj_align(cubeLabel, NULL, LV_ALIGN_CENTER, -1, -1);
-    lv_label_set_align(cubeLabel, LV_LABEL_ALIGN_CENTER);
-    lv_label_set_text(cubeLabel, (" " + std::to_string(stackHeight)).c_str());
+    lv_obj_align(cubeLabel, NULL, LV_ALIGN_CENTER, -3, -1);
+    lv_label_set_text(cubeLabel, std::to_string(stackHeight).c_str());
   }
 }
 
