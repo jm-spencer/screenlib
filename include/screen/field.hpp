@@ -73,10 +73,10 @@ class Field {
    * Field generator for the screen
    *
    * @param parent LVGL object to place upon
-   * @param x x-value from 0-240 of the leftmost side of the field, default is centered
+   * @param ilength the side length of the field (in both directions)
    * @param iautoInit print colored tiles / taped lines immediately, and after each clean
    */
-  Field(lv_obj_t *parent, uint8_t x = 120, bool iautoInit = true);
+  Field(lv_obj_t *parent, double ilength = 240, bool iautoInit = true);
   ~Field();
 
   /**
@@ -85,12 +85,42 @@ class Field {
   void clean();
 
   /**
-   * Set new x position on the screen
-   * note: Y cannot be changed, as the field takes up the entire screen vertically
+   * Set new x position of the field on the screen
    *
-   * @param x new x-value from 0-240 of the leftmost side of the field
+   * @param x new x-value of the distance from the leftmost side of the screen
+   *    (screen is 480 pixels wide)
    */
   void setX(uint8_t x);
+
+  /**
+   * Set new y position of the field on the screen
+   *
+   * @param y new y-value of the distance from the top side of the field
+   *    (screen is 240 pixels tall)
+   */
+  void setY(uint8_t y);
+
+  /**
+   * Set new position of the field on the screen
+   *
+   * note: the default(if this is never called) is 120,0 (centered)
+   *
+   * @param x new x-value of the distance from the leftmost side of the screen
+   *    (screen is 480 pixels wide)
+   * @param y new y-value of the distance from the top side of the field
+   *    (screen is 240 pixels tall)
+   */
+  void setPos(uint8_t x, uint8_t y);
+
+  /**
+   * Set the new width and height of the field
+   *
+   * this will clean the screen and remove all existing objects
+   *
+   * note: you can make the field larger than the screen,
+   *    but you would then need a way to move the screen around in order to see it
+   */
+  void setSideLength(uint ilength);
 
   /**
    * draw a group of cubes
@@ -137,7 +167,7 @@ class Field {
    *
    * called automatically by default
    */
-  void drawcoloredTiles();
+  void drawColoredTiles();
 
   /**
    * draw the zone lines
@@ -162,7 +192,7 @@ class Field {
    *
    * @param red true for red, false for blue
    * @param pos y-value of the midpoint of the robot
-   * note: there are 40 pixels for each field tile
+   *    note: every 40 given to pos represents 1 field tile
    */
   void drawRobot(bool red, uint8_t pos);
 
@@ -179,8 +209,10 @@ class Field {
   // Cubes should be drawn automatically by the above functions
   void drawCube(std::pair<uint8_t, uint8_t> pos, color color, uint8_t stackHeight, bool targeted);
 
-  static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, color color,
+  static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, double scalar, color color,
                        uint8_t stackHeight, bool targeted);
+
+  int scale(int original);
 
   void resetVectors();
 
@@ -189,6 +221,7 @@ class Field {
   lv_obj_t *obj;
 
   bool autoInit;
+  double scalar;
 
   bool wallDrawn;
   std::pair<color, color> allianceTowerContents;
