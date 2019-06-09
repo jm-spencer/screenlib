@@ -13,8 +13,7 @@ void opcontrol()
 
   // two stacks use an array of colors
   // draw a purple stack with height 1 and an orange stack with height 3 in the far red zone
-  field.draw(screen::scoringZone::farRed, {screen::color::purple, screen::color::orange},
-                        {1, 3});
+  field.draw(screen::scoringZone::farRed, {screen::color::purple, screen::color::orange}, {1, 3});
 
   // one stack does not need to use an array
   // draw a green stack with height 4 in the near red zone
@@ -37,7 +36,8 @@ void opcontrol()
   // (this is the 5 cube stack on the audience side)
   field.draw(screen::cubeGroup::near, CUBE_NEAR_LEFT + CUBE_NEAR_RIGHT + CUBE_FAR_RIGHT);
 
-  // draw the highest(rightmost), and the 2nd lowest(leftmost) cube of the 4th(closest) left cube group
+  // draw the highest(rightmost), and the 2nd lowest(leftmost) cube of the 4th(closest) left cube
+  // group
   field.draw(screen::cubeGroup::left4, CUBE_HIGHEST + CUBE_2LOWEST);
 
   // draw the left tower with no cubes in or around
