@@ -46,8 +46,7 @@
  *
  * CUBE_HIGHEST represents the highest cube in the stack, followed by CUBE_2HIGHEST (the 2nd
  * highest), followed by CUBE_2LOWEST (the 2nd lowest), and finally CUBE_LOWEST As the 4 cube stacks
- * on the left and right are in the same order but slightly different positions, the corresponding
- * cubes are represented the same (purple to purple, orange to orange, green to green)
+ * on the left and right are in the same order but slightly different positions
  *
  * CUBE_FAR and CUBE_NEAR are for the cube Groups farLeft and farRight
  *
@@ -69,14 +68,31 @@ namespace screen {
 
 class Field {
  public:
+
+   /**
+    * A struct that controls the drawing of numbers on cubes (which represent height)
+    *
+    * deltaX how far to move the number horizontally from default
+    * deltaY how far to move the number vertically from default
+    * fontStyle which style to use; can be used to change the font, color, etc. of the number
+   */
+   struct NumberConfig{
+     int deltaX, deltaY;
+     lv_style_t* fontStyle;
+   };
+
   /**
    * Field generator for the screen
    *
    * @param parent LVGL object to place upon
    * @param ilength the side length of the field (in both directions)
    * @param iautoInit print colored tiles / taped lines immediately, and after each clean
+   * @param iconfig a configuration for the numbers on the cubes,
+   *    use deltaX and deltaY to adjust the position of the number, and set a different
+   *    style using fontStyle
    */
-  Field(lv_obj_t *parent, double ilength = 240, bool iautoInit = true);
+  Field(lv_obj_t *parent, double ilength = 240, bool iautoInit = true,
+        NumberConfig iconfig = {1, -1, &littleWhiteText});
   ~Field();
 
   /**
@@ -90,7 +106,7 @@ class Field {
    * @param x new x-value of the distance from the leftmost side of the screen
    *    (screen is 480 pixels wide)
    */
-  void setX(uint8_t x);
+  void setX(int x);
 
   /**
    * Set new y position of the field on the screen
@@ -98,7 +114,7 @@ class Field {
    * @param y new y-value of the distance from the top side of the field
    *    (screen is 240 pixels tall)
    */
-  void setY(uint8_t y);
+  void setY(int y);
 
   /**
    * Set new position of the field on the screen
@@ -110,7 +126,7 @@ class Field {
    * @param y new y-value of the distance from the top side of the field
    *    (screen is 240 pixels tall)
    */
-  void setPos(uint8_t x, uint8_t y);
+  void setPos(int x, int y);
 
   /**
    * Set the new width and height of the field
@@ -210,7 +226,7 @@ class Field {
   void drawCube(std::pair<uint8_t, uint8_t> pos, color color, uint8_t stackHeight, bool targeted);
 
   static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, double scalar, color color,
-                       uint8_t stackHeight, bool targeted);
+                       uint8_t stackHeight, NumberConfig config, bool targeted);
 
   int scale(int original);
 
@@ -229,6 +245,8 @@ class Field {
   std::vector<cubeGroup> cubesToDraw;
   std::vector<tower> towersToDraw;
   std::vector<scoringZone> zonesToDraw;
+
+  NumberConfig config;
 };
 
 }  // namespace screen

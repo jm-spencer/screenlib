@@ -11,8 +11,6 @@ void opcontrol()
 
   screen::Field field(scr);
 
-  field.setSideLength(400);
-
   // two stacks use an array of colors
   // draw a purple stack with height 1 and an orange stack with height 3 in the far red zone
   field.draw(screen::scoringZone::farRed, {screen::color::purple, screen::color::orange},

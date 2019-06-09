@@ -2,13 +2,14 @@
 
 namespace screen {
 
-Field::Field(lv_obj_t *parent, const double ilength, const bool iautoInit)
-    : scalar(ilength / 240), autoInit(iautoInit), wallDrawn(false),
-      allianceTowerContents(color::none, color::none)
+Field::Field(lv_obj_t *parent, const double ilength, const bool iautoInit,
+             const NumberConfig iconfig):
+             scalar(ilength / 240), autoInit(iautoInit), config(iconfig),
+             wallDrawn(false), allianceTowerContents(color::none, color::none)
 {
   obj = lv_obj_create(parent, NULL);
   lv_obj_set_style(obj, &fieldStyle);
-  lv_obj_set_size(obj, scale(240), scale(240));
+  lv_obj_set_size(obj, ilength, ilength);
   lv_obj_set_pos(obj, 120, 0);
 
   resetVectors();
@@ -38,25 +39,25 @@ void Field::clean()
   }
 }
 
-void Field::setX(uint8_t x)
+void Field::setX(int x)
 {
   lv_obj_set_x(obj, x);
 }
 
-void Field::setY(uint8_t y)
+void Field::setY(int y)
 {
   lv_obj_set_y(obj, y);
 }
 
-void Field::setPos(uint8_t x, uint8_t y)
+void Field::setPos(int x, int y)
 {
   lv_obj_set_pos(obj, x, y);
 }
 
 void Field::setSideLength(uint ilength){
   scalar = ilength / 240.0;
-  clean();
   lv_obj_set_size(obj, ilength, ilength);
+  clean();
 }
 
 void Field::draw(const cubeGroup pos, const uint8_t presence)
@@ -227,7 +228,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, scale(32), scale(112));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
 
       if (cubePresence & 0b11111000) {
         drawCube({35, 101}, color::purple, 1, targeted);
@@ -243,7 +244,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, scale(192), scale(112));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
 
       if (cubePresence & 0b11111000) {
         drawCube({195, 101}, color::purple, 1, targeted);
@@ -259,7 +260,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, scale(112), scale(112));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
       if (cubePresence & 0b11111000) {
         drawCube({115, 101}, color::purple, 1, targeted);
       }
@@ -277,7 +278,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, scale(112), scale(52));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
       if (cubePresence & 0b11111000) {
         drawCube({115, 41}, color::purple, 1, targeted);
       }
@@ -295,7 +296,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       lv_obj_set_style(tower, &neutralTower);
       lv_obj_set_pos(tower, scale(112), scale(172));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
       if (cubePresence & 0b11111000) {
         drawCube({115, 161}, color::purple, 1, targeted);
       }
@@ -313,13 +314,13 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       lv_obj_set_style(tower, &redTower);
       lv_obj_set_pos(tower, scale(54), scale(228));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
       break;
     case tower::blue:
       lv_obj_set_style(tower, &blueTower);
       lv_obj_set_pos(tower, scale(174), scale(228));
 
-      drawCube(tower, {3, 3}, scalar, contents, 1, true);
+      drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
       break;
   }
 }
@@ -350,8 +351,8 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       lv_obj_set_pos(zone, 0, 0);
 
       if (targeted) {
-        drawCube(zone, {4, 5}, scalar, contents.first, stackHeight.first, false);
-        drawCube(zone, {15, 5}, scalar, contents.second, stackHeight.second, false);
+        drawCube(zone, {4, 5}, scalar, contents.first, stackHeight.first, config, false);
+        drawCube(zone, {15, 5}, scalar, contents.second, stackHeight.second, config, false);
       }
       break;
     case scoringZone::farBlue:
@@ -360,8 +361,8 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       lv_obj_set_pos(zone, scale(211), 0);
 
       if (targeted) {
-        drawCube(zone, {15, 5}, scalar, contents.first, stackHeight.first, false);
-        drawCube(zone, {4, 5}, scalar, contents.second, stackHeight.second, false);
+        drawCube(zone, {15, 5}, scalar, contents.first, stackHeight.first, config, false);
+        drawCube(zone, {4, 5}, scalar, contents.second, stackHeight.second, config, false);
       }
       break;
     case scoringZone::nearRed:
@@ -370,7 +371,7 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       lv_obj_set_pos(zone, 0, scale(220));
 
       if (targeted) {
-        drawCube(zone, {5, 5}, scalar, contents.first, stackHeight.first, false);
+        drawCube(zone, {5, 5}, scalar, contents.first, stackHeight.first, config, false);
       }
       break;
     case scoringZone::nearBlue:
@@ -379,7 +380,7 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       lv_obj_set_pos(zone, scale(220), scale(220));
 
       if (targeted) {
-        drawCube(zone, {5, 5}, scalar, contents.first, stackHeight.first, false);
+        drawCube(zone, {5, 5}, scalar, contents.first, stackHeight.first, config, false);
       }
       break;
   }
@@ -488,11 +489,12 @@ void Field::finishDrawing()
 void Field::drawCube(const std::pair<uint8_t, uint8_t> pos, const color color,
                      const uint8_t stackHeight, const bool targeted)
 {
-  drawCube(obj, pos, scalar, color, stackHeight, targeted);
+  drawCube(obj, pos, scalar, color, stackHeight, config, targeted);
 }
 
 void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, double scalar,
-                     const color color, const uint8_t stackHeight, const bool targeted)
+                     const color color, const uint8_t stackHeight, const NumberConfig config,
+                     const bool targeted)
 {
   if (color == color::none)
     return;
@@ -508,10 +510,10 @@ void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, do
 
   if (stackHeight > 1) {
     lv_obj_t *cubeLabel = lv_label_create(cube, NULL);
-    lv_label_set_style(cubeLabel, &littleWhiteText);
-    lv_obj_align(cubeLabel, NULL, LV_ALIGN_CENTER, -1, -1);
+    lv_label_set_style(cubeLabel, config.fontStyle);
+    lv_obj_align(cubeLabel, NULL, LV_ALIGN_CENTER, config.deltaX, config.deltaY);
     lv_label_set_align(cubeLabel, LV_LABEL_ALIGN_CENTER);
-    lv_label_set_text(cubeLabel, (" " + std::to_string(stackHeight)).c_str());
+    lv_label_set_text(cubeLabel, std::to_string(stackHeight).c_str());
   }
 }
 

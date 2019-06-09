@@ -55,13 +55,12 @@ Alternatively, macros can be used for more verbose code; here is the equivalent 
 `field.draw(screen::cubeGroup::right4, CUBE_HIGHEST + CUBE_2LOWEST);`
 
 `CUBE_HIGHEST` represents the highest cube in the stack, followed by `CUBE_2HIGHEST` (the 2nd highest), followed by `CUBE_2LOWEST` (the 2nd lowest), and finally `CUBE_LOWEST`  
-As the 4 cube stacks on the left and right are in the same order but slightly different positions, the corresponding cubes are represented the same (purple to purple, orange to orange, green to green)
 
 `CUBE_FAR` and `CUBE_NEAR` are for the cube sectors farLeft and farRight
 
 `CUBE_TOP_NEAR`, `CUBE_FAR_LEFT`, `CUBE_NEAR_LEFT`, `CUBE_FAR_RIGHT`, and `CUBE_NEAR_RIGHT` are used for the five cube stack on the near side
 
-and finally, all macros starting with `TOWER_CUBE_` refer to the cubes around a tower
+and finally, all macros starting with `TOWER_CUBE_` refer to the cubes around a tower  
 
 Scored Cubes
 ------------
@@ -69,6 +68,12 @@ Scored cubes are drawn along with where they are, either in a tower or a scoring
 (`screen::color::`). In a scoring zone the second parameter does the same however, two colors can be placed in an array to denote two stacks. In addition,
 a third parameter is used to display "stack height", a number printed on top to describe how many cubes are in the stack.  
 Note: use `screen::color::none` to abstain from printing a scored cube in that position
+
+Other
+-----
+The field can be repositioned with `setX`, `setY`, or `setPos`.  
+and can be resized using `setSideLength`  
+when changing size, if you are unsatisfied with the numbers printed on the cubes, you can modify the `NumberConfig`, which is given as the 4th parameter in the constructor. More information is available in [field.hpp](./include/field.hpp)  
 
 Example
 -------
@@ -78,4 +83,4 @@ Acknowledgements
 ================
 smallfont.c is converted version of the digits 0-9 from [Synchronizer NBP Font](https://www.fontspace.com/total-fontgeek-dtf-ltd/synchronizer-nbp) by total FontGeek DTF, Ltd. all credit regarding the font to them.
 
-Thanks to Hotel from the PROS team, Salmon from Okapilib, and Theo from 7842F, for giving some advice on improving the code here
+Thanks to Potatehoes from 914M for beta testing, as well as Hotel from the PROS team, Salmon from Okapilib, and Theo from 7842F, for giving some advice on improving the code here
