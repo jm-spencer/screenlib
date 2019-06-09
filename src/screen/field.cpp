@@ -56,7 +56,7 @@ void Field::setPos(uint8_t x, uint8_t y)
 void Field::setSideLength(uint ilength){
   scalar = ilength / 240.0;
   clean();
-  pros::delay(25);
+  lv_obj_set_size(obj, ilength, ilength);
 }
 
 void Field::draw(const cubeGroup pos, const uint8_t presence)
@@ -407,6 +407,14 @@ void Field::drawColoredTiles()
 
 void Field::drawLines()
 {
+
+  short s40, s80, s160, s200, s240;
+
+  static lv_point_t irzPts[3];
+  static lv_point_t orzPts[4];
+  static lv_point_t ibzPts[3];
+  static lv_point_t obzPts[4];
+
   lv_obj_t *middleLine1 = lv_obj_create(obj, NULL);
   lv_obj_set_style(middleLine1, &lineStyle);
   lv_obj_set_pos(middleLine1, scale(117), 3);
@@ -417,25 +425,25 @@ void Field::drawLines()
   lv_obj_t *innerRedZone = lv_line_create(obj, NULL);
   lv_line_set_style(innerRedZone, &lineStyle);
 
-  short s40 = static_cast<short>(scale(40));
-  short s80 = static_cast<short>(scale(80));
-  short s160 = static_cast<short>(scale(160));
-  short s200 = static_cast<short>(scale(200));
-  short s240 = static_cast<short>(scale(240));
+  s40 = static_cast<short>(scale(40));
+  s80 = static_cast<short>(scale(80));
+  s160 = static_cast<short>(scale(160));
+  s200 = static_cast<short>(scale(200));
+  s240 = static_cast<short>(scale(240));
 
-  static lv_point_t irzPts[3] = {{0, s40}, {s40, s40}, {s40, 0}};
+  irzPts[0] = {0, s40}; irzPts[1] = {s40, s40}; irzPts[2] = {s40, 0};
   lv_line_set_points(innerRedZone, irzPts, 3);
 
   lv_obj_t *outerRedZone      = lv_line_create(obj, innerRedZone);
-  static lv_point_t orzPts[4] = {{0, s80}, {s40, s80}, {s80, s40}, {s80, 0}};
+  orzPts[0] = {0, s80}; orzPts[1] = {s40, s80}; orzPts[2] = {s80, s40}; orzPts[3] = {s80, 0};
   lv_line_set_points(outerRedZone, orzPts, 4);
 
   lv_obj_t *innerBlueZone     = lv_line_create(obj, innerRedZone);
-  static lv_point_t ibzPts[3] = {{s200, 0}, {s200, s40}, {s240, s40}};
+  ibzPts[0] = {s200, 0}; ibzPts[1] = {s200, s40}; ibzPts[2] = {s240, s40};
   lv_line_set_points(innerBlueZone, ibzPts, 3);
 
   lv_obj_t *outerBlueZone     = lv_line_create(obj, innerRedZone);
-  static lv_point_t obzPts[4] = {{s160, 0}, {s160, s40}, {s200, s80}, {s240, s80}};
+  obzPts[0] = {s160, 0}; obzPts[1] = {s160, s40}; obzPts[2] = {s200, s80}; obzPts[3] = {s240, s80};
   lv_line_set_points(outerBlueZone, obzPts, 4);
 }
 
