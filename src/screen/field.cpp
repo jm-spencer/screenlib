@@ -3,9 +3,12 @@
 namespace screen {
 
 Field::Field(lv_obj_t *parent, const double ilength, const bool iautoInit,
-             const NumberConfig iconfig):
-             scalar(ilength / 240), autoInit(iautoInit), config(iconfig),
-             wallDrawn(false), allianceTowerContents(color::none, color::none)
+             const NumberConfig iconfig)
+    : scalar(ilength / 240),
+      autoInit(iautoInit),
+      config(iconfig),
+      wallDrawn(false),
+      allianceTowerContents(color::none, color::none)
 {
   obj = lv_obj_create(parent, NULL);
   lv_obj_set_style(obj, &fieldStyle);
@@ -54,7 +57,8 @@ void Field::setPos(int x, int y)
   lv_obj_set_pos(obj, x, y);
 }
 
-void Field::setSideLength(uint ilength){
+void Field::setSideLength(uint ilength)
+{
   scalar = ilength / 240.0;
   lv_obj_set_size(obj, ilength, ilength);
   clean();
@@ -331,7 +335,7 @@ void Field::draw(const scoringZone pos, const color contents, const uint8_t stac
 }
 
 void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
-                            const std::pair<uint8_t, uint8_t> stackHeight)
+                 const std::pair<uint8_t, uint8_t> stackHeight)
 {
   bool targeted = contents.first != color::none;
 
@@ -408,7 +412,6 @@ void Field::drawColoredTiles()
 
 void Field::drawLines()
 {
-
   short s40, s80, s160, s200, s240;
 
   static lv_point_t irzPts[3];
@@ -426,25 +429,38 @@ void Field::drawLines()
   lv_obj_t *innerRedZone = lv_line_create(obj, NULL);
   lv_line_set_style(innerRedZone, &lineStyle);
 
-  s40 = static_cast<short>(scale(40));
-  s80 = static_cast<short>(scale(80));
+  s40  = static_cast<short>(scale(40));
+  s80  = static_cast<short>(scale(80));
   s160 = static_cast<short>(scale(160));
   s200 = static_cast<short>(scale(200));
   s240 = static_cast<short>(scale(240));
 
-  irzPts[0] = {0, s40}; irzPts[1] = {s40, s40}; irzPts[2] = {s40, 0};
+  irzPts[0] = {0, s40};
+  irzPts[1] = {s40, s40};
+  irzPts[2] = {s40, 0};
   lv_line_set_points(innerRedZone, irzPts, 3);
 
-  lv_obj_t *outerRedZone      = lv_line_create(obj, innerRedZone);
-  orzPts[0] = {0, s80}; orzPts[1] = {s40, s80}; orzPts[2] = {s80, s40}; orzPts[3] = {s80, 0};
+  lv_obj_t *outerRedZone = lv_line_create(obj, innerRedZone);
+
+  orzPts[0] = {0, s80};
+  orzPts[1] = {s40, s80};
+  orzPts[2] = {s80, s40};
+  orzPts[3] = {s80, 0};
   lv_line_set_points(outerRedZone, orzPts, 4);
 
-  lv_obj_t *innerBlueZone     = lv_line_create(obj, innerRedZone);
-  ibzPts[0] = {s200, 0}; ibzPts[1] = {s200, s40}; ibzPts[2] = {s240, s40};
+  lv_obj_t *innerBlueZone = lv_line_create(obj, innerRedZone);
+
+  ibzPts[0] = {s200, 0};
+  ibzPts[1] = {s200, s40};
+  ibzPts[2] = {s240, s40};
   lv_line_set_points(innerBlueZone, ibzPts, 3);
 
-  lv_obj_t *outerBlueZone     = lv_line_create(obj, innerRedZone);
-  obzPts[0] = {s160, 0}; obzPts[1] = {s160, s40}; obzPts[2] = {s200, s80}; obzPts[3] = {s240, s80};
+  lv_obj_t *outerBlueZone = lv_line_create(obj, innerRedZone);
+
+  obzPts[0] = {s160, 0};
+  obzPts[1] = {s160, s40};
+  obzPts[2] = {s200, s80};
+  obzPts[3] = {s240, s80};
   lv_line_set_points(outerBlueZone, obzPts, 4);
 }
 
@@ -525,16 +541,15 @@ int Field::scale(int original)
 void Field::resetVectors()
 {
   // fully populate the vectors
-  cubesToDraw  = {cubeGroup::farLeft, cubeGroup::farRight, cubeGroup::farPurple,
-                 cubeGroup::left1,   cubeGroup::left2,    cubeGroup::left3,
-                 cubeGroup::left4,   cubeGroup::right1,   cubeGroup::right2,
-                 cubeGroup::right3,  cubeGroup::right4,   cubeGroup::near};
+  cubesToDraw = {cubeGroup::farLeft, cubeGroup::farRight, cubeGroup::farPurple, cubeGroup::left1,
+                 cubeGroup::left2,   cubeGroup::left3,    cubeGroup::left4,     cubeGroup::right1,
+                 cubeGroup::right2,  cubeGroup::right3,   cubeGroup::right4,    cubeGroup::near};
 
   towersToDraw = {tower::left, tower::right, tower::center, tower::far,
                   tower::near, tower::red,   tower::blue};
 
-  zonesToDraw  = {scoringZone::farRed, scoringZone::farBlue,
-                  scoringZone::nearRed, scoringZone::nearBlue};
+  zonesToDraw = {scoringZone::farRed,  scoringZone::farBlue, 
+                 scoringZone::nearRed, scoringZone::nearBlue};
 }
 
 }  // namespace screen

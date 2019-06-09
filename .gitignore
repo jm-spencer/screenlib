@@ -4,3 +4,5 @@ bin/
 
 compile_commands.json
 temp.log
+
+*.zip

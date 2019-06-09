@@ -68,18 +68,17 @@ namespace screen {
 
 class Field {
  public:
-
-   /**
-    * A struct that controls the drawing of numbers on cubes (which represent height)
-    *
-    * deltaX how far to move the number horizontally from default
-    * deltaY how far to move the number vertically from default
-    * fontStyle which style to use; can be used to change the font, color, etc. of the number
+  /**
+   * A struct that controls the drawing of numbers on cubes (which represent height)
+   *
+   * deltaX how far to move the number horizontally from default
+   * deltaY how far to move the number vertically from default
+   * fontStyle which style to use; can be used to change the font, color, etc. of the number
    */
-   struct NumberConfig{
-     int deltaX, deltaY;
-     lv_style_t* fontStyle;
-   };
+  struct NumberConfig {
+    int deltaX, deltaY;
+    lv_style_t *fontStyle;
+  };
 
   /**
    * Field generator for the screen
@@ -176,7 +175,7 @@ class Field {
    *    for both stacks. See the README for more information
    */
   void draw(scoringZone pos, std::pair<color, color> contents,
-                       std::pair<uint8_t, uint8_t> stackHeight);
+            std::pair<uint8_t, uint8_t> stackHeight);
 
   /**
    * draw the four colored tiles
@@ -225,8 +224,8 @@ class Field {
   // Cubes should be drawn automatically by the above functions
   void drawCube(std::pair<uint8_t, uint8_t> pos, color color, uint8_t stackHeight, bool targeted);
 
-  static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, double scalar, color color,
-                       uint8_t stackHeight, NumberConfig config, bool targeted);
+  static void drawCube(lv_obj_t *parent, std::pair<uint8_t, uint8_t> pos, double scalar,
+                       color color, uint8_t stackHeight, NumberConfig config, bool targeted);
 
   int scale(int original);
 
