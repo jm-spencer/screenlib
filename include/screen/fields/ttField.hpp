@@ -1,7 +1,8 @@
 #ifndef SCREEN_FIELD_HPP_
 #define SCREEN_FIELD_HPP_
 #include <vector>
-#include "screen/resources.hpp"
+#include "screen/resources/generalResources.hpp"
+#include "screen/resources/ttFieldResources.hpp"
 
 #define TOWER_CUBE_FAR 8
 #define TOWER_CUBE_RIGHT 4
