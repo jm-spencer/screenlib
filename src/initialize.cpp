@@ -4,7 +4,7 @@
 void initialize()
 {
   // this is very important
-  screen::initializeStyles();
+  screen::resources::initialize();
 }
 
 void disabled() {}

@@ -1,8 +1,7 @@
 #ifndef SCREEN_FIELD_HPP_
 #define SCREEN_FIELD_HPP_
 #include <vector>
-#include "screen/resources/generalResources.hpp"
-#include "screen/resources/ttFieldResources.hpp"
+#include "screen/resources.hpp"
 
 #define TOWER_CUBE_FAR 8
 #define TOWER_CUBE_RIGHT 4
@@ -22,6 +21,33 @@
 #define CUBE_FAR_RIGHT 4
 #define CUBE_NEAR_LEFT 2
 #define CUBE_FAR_LEFT 1
+
+namespace screen {
+
+/**
+ * Various enums for the Tower Takeover field
+ */
+
+enum class color { none, orange, green, purple };
+
+enum class cubeGroup {
+  farLeft,
+  farRight,
+  farPurple,
+  left1,
+  left2,
+  left3,
+  left4,
+  right1,
+  right2,
+  right3,
+  right4,
+  near
+};
+
+enum class tower { left, right, center, far, near, red, blue };
+
+enum class scoringZone { farRed, farBlue, nearRed, nearBlue };
 
 /**
  * See Field.png on https://github.com/SpencerJ21/screenlib
@@ -65,8 +91,6 @@
  * printing a scored cube in that position
  */
 
-namespace screen {
-
 class Field {
  public:
   /**
@@ -92,7 +116,7 @@ class Field {
    *    style using fontStyle
    */
   Field(lv_obj_t *parent, double ilength = 240, bool iautoInit = true,
-        NumberConfig iconfig = {1, -1, &littleWhiteText});
+        NumberConfig iconfig = {1, -1, &resources::littleWhiteText});
   ~Field();
 
   /**

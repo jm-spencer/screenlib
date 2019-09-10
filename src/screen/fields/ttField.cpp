@@ -1,4 +1,4 @@
-#include "screen/field.hpp"
+#include "screen/fields/ttField.hpp"
 
 namespace screen {
 
@@ -11,7 +11,7 @@ Field::Field(lv_obj_t *parent, const double ilength, const bool iautoInit,
       allianceTowerContents(color::none, color::none)
 {
   obj = lv_obj_create(parent, NULL);
-  lv_obj_set_style(obj, &fieldStyle);
+  lv_obj_set_style(obj, &resources::fieldStyle);
   lv_obj_set_size(obj, ilength, ilength);
   lv_obj_set_pos(obj, 120, 0);
 
@@ -229,7 +229,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
 
   switch (pos) {
     case tower::left:
-      lv_obj_set_style(tower, &neutralTower);
+      lv_obj_set_style(tower, &resources::neutralTower);
       lv_obj_set_pos(tower, scale(32), scale(112));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
@@ -245,7 +245,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       }
       break;
     case tower::right:
-      lv_obj_set_style(tower, &neutralTower);
+      lv_obj_set_style(tower, &resources::neutralTower);
       lv_obj_set_pos(tower, scale(192), scale(112));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
@@ -261,7 +261,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       }
       break;
     case tower::center:
-      lv_obj_set_style(tower, &neutralTower);
+      lv_obj_set_style(tower, &resources::neutralTower);
       lv_obj_set_pos(tower, scale(112), scale(112));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
@@ -279,7 +279,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       }
       break;
     case tower::far:
-      lv_obj_set_style(tower, &neutralTower);
+      lv_obj_set_style(tower, &resources::neutralTower);
       lv_obj_set_pos(tower, scale(112), scale(52));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
@@ -297,7 +297,7 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       }
       break;
     case tower::near:
-      lv_obj_set_style(tower, &neutralTower);
+      lv_obj_set_style(tower, &resources::neutralTower);
       lv_obj_set_pos(tower, scale(112), scale(172));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
@@ -315,13 +315,13 @@ void Field::draw(const tower pos, const color contents, const uint8_t cubePresen
       }
       break;
     case tower::red:
-      lv_obj_set_style(tower, &redTower);
+      lv_obj_set_style(tower, &resources::redTower);
       lv_obj_set_pos(tower, scale(54), scale(228));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
       break;
     case tower::blue:
-      lv_obj_set_style(tower, &blueTower);
+      lv_obj_set_style(tower, &resources::blueTower);
       lv_obj_set_pos(tower, scale(174), scale(228));
 
       drawCube(tower, {3, 3}, scalar, contents, 1, config, true);
@@ -350,7 +350,7 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
 
   switch (pos) {
     case scoringZone::farRed:
-      lv_obj_set_style(zone, targeted ? &redZoneHighlighted : &redZone);
+      lv_obj_set_style(zone, targeted ? &resources::redZoneHighlighted : &resources::redZone);
       lv_obj_set_size(zone, scale(29), scale(20));
       lv_obj_set_pos(zone, 0, 0);
 
@@ -360,7 +360,7 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       }
       break;
     case scoringZone::farBlue:
-      lv_obj_set_style(zone, targeted ? &blueZoneHighlighted : &blueZone);
+      lv_obj_set_style(zone, targeted ? &resources::blueZoneHighlighted : &resources::blueZone);
       lv_obj_set_size(zone, scale(29), scale(20));
       lv_obj_set_pos(zone, scale(211), 0);
 
@@ -370,7 +370,7 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       }
       break;
     case scoringZone::nearRed:
-      lv_obj_set_style(zone, targeted ? &redZoneHighlighted : &redZone);
+      lv_obj_set_style(zone, targeted ? &resources::redZoneHighlighted : &resources::redZone);
       lv_obj_set_size(zone, scale(20), scale(20));
       lv_obj_set_pos(zone, 0, scale(220));
 
@@ -379,7 +379,7 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
       }
       break;
     case scoringZone::nearBlue:
-      lv_obj_set_style(zone, targeted ? &blueZoneHighlighted : &blueZone);
+      lv_obj_set_style(zone, targeted ? &resources::blueZoneHighlighted : &resources::blueZone);
       lv_obj_set_size(zone, scale(20), scale(20));
       lv_obj_set_pos(zone, scale(220), scale(220));
 
@@ -397,14 +397,14 @@ void Field::draw(const scoringZone pos, const std::pair<color, color> contents,
 void Field::drawColoredTiles()
 {
   lv_obj_t *redLeft1 = lv_obj_create(obj, NULL);
-  lv_obj_set_style(redLeft1, &redAlliance);
+  lv_obj_set_style(redLeft1, &resources::redAlliance);
   lv_obj_set_size(redLeft1, scale(40), scale(40));
   lv_obj_set_pos(redLeft1, 0, scale(40));
   lv_obj_t *redLeft2 = lv_obj_create(obj, redLeft1);
   lv_obj_set_pos(redLeft2, scale(40), 0);
 
   lv_obj_t *blueLeft1 = lv_obj_create(obj, redLeft1);
-  lv_obj_set_style(blueLeft1, &blueAlliance);
+  lv_obj_set_style(blueLeft1, &resources::blueAlliance);
   lv_obj_set_pos(blueLeft1, scale(200), scale(40));
   lv_obj_t *blueLeft2 = lv_obj_create(obj, blueLeft1);
   lv_obj_set_pos(blueLeft2, scale(160), 0);
@@ -420,14 +420,14 @@ void Field::drawLines()
   static lv_point_t obzPts[4];
 
   lv_obj_t *middleLine1 = lv_obj_create(obj, NULL);
-  lv_obj_set_style(middleLine1, &lineStyle);
+  lv_obj_set_style(middleLine1, &resources::lineStyle);
   lv_obj_set_pos(middleLine1, scale(117), 3);
   lv_obj_set_size(middleLine1, scale(2), scale(234));
   lv_obj_t *middleLine2 = lv_obj_create(obj, middleLine1);
   lv_obj_set_x(middleLine1, scale(121));
 
   lv_obj_t *innerRedZone = lv_line_create(obj, NULL);
-  lv_line_set_style(innerRedZone, &lineStyle);
+  lv_line_set_style(innerRedZone, &resources::lineStyle);
 
   s40  = static_cast<short>(scale(40));
   s80  = static_cast<short>(scale(80));
@@ -467,7 +467,7 @@ void Field::drawLines()
 void Field::reinforcePerimeter()
 {
   lv_obj_t *perimeter = lv_obj_create(obj, NULL);
-  lv_obj_set_style(perimeter, &perimeterStyle);
+  lv_obj_set_style(perimeter, &resources::perimeterStyle);
   lv_obj_set_size(perimeter, scale(240), scale(240));
   lv_obj_set_pos(perimeter, 0, 0);
 
@@ -482,7 +482,7 @@ void Field::reinforcePerimeter()
 void Field::drawRobot(const bool red, const uint8_t pos)
 {
   lv_obj_t *robot = lv_obj_create(obj, NULL);
-  lv_obj_set_style(robot, red ? &redAllianceHighlighted : &blueAllianceHighlighted);
+  lv_obj_set_style(robot, red ? &resources::redAllianceHighlighted : &resources::blueAllianceHighlighted);
   lv_obj_set_size(robot, scale(30), scale(30));
   lv_obj_set_pos(robot, red ? 3 : scale(210) - 3, scale(pos - 15));
 }
@@ -518,9 +518,9 @@ void Field::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, do
   lv_obj_t *cube = lv_obj_create(parent, NULL);
   lv_obj_set_style(
       cube, (color == color::orange
-                 ? (targeted ? &orangeStyleHighlighted : &orangeStyle)
-                 : color == color::green ? (targeted ? &greenStyleHighlighted : &greenStyle)
-                                         : (targeted ? &purpleStyleHighlighted : &purpleStyle)));
+                 ? (targeted ? &resources::orangeStyleHighlighted : &resources::orangeStyle)
+                 : color == color::green ? (targeted ? &resources::greenStyleHighlighted : &resources::greenStyle)
+                                         : (targeted ? &resources::purpleStyleHighlighted : &resources::purpleStyle)));
   lv_obj_set_pos(cube, scalar * pos.first, scalar * pos.second);
   lv_obj_set_size(cube, scalar * 10, scalar * 10);
 
@@ -548,7 +548,7 @@ void Field::resetVectors()
   towersToDraw = {tower::left, tower::right, tower::center, tower::far,
                   tower::near, tower::red,   tower::blue};
 
-  zonesToDraw = {scoringZone::farRed,  scoringZone::farBlue, 
+  zonesToDraw = {scoringZone::farRed,  scoringZone::farBlue,
                  scoringZone::nearRed, scoringZone::nearBlue};
 }
 
