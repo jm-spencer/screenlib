@@ -136,10 +136,10 @@ class Field {
    *    but you would then need a way to move the screen around in order to see it
    */
   void setSideLength(uint ilength);
-  
+
   /**
    * Hide the field
-   * 
+   *
    * @param hide whether to hide the field
    */
   void hide(bool hide);
