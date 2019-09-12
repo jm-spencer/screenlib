@@ -9,7 +9,7 @@ void opcontrol()
   lv_obj_t *scr = lv_obj_create(NULL, NULL);
   lv_scr_load(scr);
 
-  screen::Field field(scr);
+  screen::ttField field(scr);
 
   // two stacks use an array of colors
   // draw a purple stack with height 1 and an orange stack with height 3 in the far red zone
