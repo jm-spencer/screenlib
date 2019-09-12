@@ -1,8 +1,8 @@
 #ifndef SCREEN_FIELD_TT_HPP_
 #define SCREEN_FIELD_TT_HPP_
 #include <vector>
-#include "screen/resources.hpp"
 #include "screen/fields/baseField.hpp"
+#include "screen/resources.hpp"
 
 #define TOWER_CUBE_FAR 8
 #define TOWER_CUBE_RIGHT 4
@@ -117,8 +117,11 @@ class ttField : public BaseField {
    *    style using fontStyle
    */
   ttField(lv_obj_t *parent, double ilength = 240, bool iautoInit = true,
-        NumberConfig iconfig = {1, -1, &resources::littleWhiteText});
+          NumberConfig iconfig = {1, -1, &resources::littleWhiteText});
 
+  /**
+   * Remove all objects from the field, and reset to default
+   */
   virtual void clean() override;
 
   /**
@@ -215,7 +218,7 @@ class ttField : public BaseField {
 
   void resetVectors();
 
-  const uint numOfBits[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
+  const uint8_t numOfBits[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
 
   bool autoInit;
 

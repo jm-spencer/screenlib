@@ -1,9 +1,10 @@
 #include "screen/fields/ttField.hpp"
+#include <string>
 
 namespace screen {
 
 ttField::ttField(lv_obj_t *parent, const double ilength, const bool iautoInit,
-             const NumberConfig iconfig)
+                 const NumberConfig iconfig)
     : autoInit(iautoInit),
       config(iconfig),
       BaseField(parent, ilength),
@@ -303,7 +304,7 @@ void ttField::draw(const scoringZone pos, const color contents, const uint8_t st
 }
 
 void ttField::draw(const scoringZone pos, const std::pair<color, color> contents,
-                 const std::pair<uint8_t, uint8_t> stackHeight)
+                   const std::pair<uint8_t, uint8_t> stackHeight)
 {
   bool targeted = contents.first != color::none;
 
@@ -450,7 +451,8 @@ void ttField::reinforcePerimeter()
 void ttField::drawRobot(const bool red, const uint8_t pos)
 {
   lv_obj_t *robot = getChildObj();
-  lv_obj_set_style(robot, red ? &resources::redAllianceHighlighted : &resources::blueAllianceHighlighted);
+  lv_obj_set_style(robot,
+                   red ? &resources::redAllianceHighlighted : &resources::blueAllianceHighlighted);
   lv_obj_set_size(robot, scale(30), scale(30));
   lv_obj_set_pos(robot, red ? 3 : scale(210) - 3, scale(pos - 15));
 }
@@ -471,24 +473,26 @@ void ttField::finishDrawing()
 }
 
 void ttField::drawCube(const std::pair<uint8_t, uint8_t> pos, const color color,
-                     const uint8_t stackHeight, const bool targeted)
+                       const uint8_t stackHeight, const bool targeted)
 {
   drawCube(obj, pos, scalar, color, stackHeight, config, targeted);
 }
 
 void ttField::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, double scalar,
-                     const color color, const uint8_t stackHeight, const NumberConfig config,
-                     const bool targeted)
+                       const color color, const uint8_t stackHeight, const NumberConfig config,
+                       const bool targeted)
 {
   if (color == color::none)
     return;
 
   lv_obj_t *cube = lv_obj_create(parent, NULL);
   lv_obj_set_style(
-      cube, (color == color::orange
-                 ? (targeted ? &resources::orangeStyleHighlighted : &resources::orangeStyle)
-                 : color == color::green ? (targeted ? &resources::greenStyleHighlighted : &resources::greenStyle)
-                                         : (targeted ? &resources::purpleStyleHighlighted : &resources::purpleStyle)));
+      cube,
+      (color == color::orange
+           ? (targeted ? &resources::orangeStyleHighlighted : &resources::orangeStyle)
+           : color == color::green
+                 ? (targeted ? &resources::greenStyleHighlighted : &resources::greenStyle)
+                 : (targeted ? &resources::purpleStyleHighlighted : &resources::purpleStyle)));
   lv_obj_set_pos(cube, scalar * pos.first, scalar * pos.second);
   lv_obj_set_size(cube, scalar * 10, scalar * 10);
 
@@ -516,8 +520,8 @@ void ttField::resetVectors()
   towersToDraw = {tower::left, tower::right, tower::center, tower::far,
                   tower::near, tower::red,   tower::blue};
 
-  zonesToDraw = {scoringZone::farRed,  scoringZone::farBlue,
-                 scoringZone::nearRed, scoringZone::nearBlue};
+  zonesToDraw = {scoringZone::farRed, scoringZone::farBlue, scoringZone::nearRed,
+                 scoringZone::nearBlue};
 }
 
 }  // namespace screen

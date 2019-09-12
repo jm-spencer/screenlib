@@ -1,8 +1,9 @@
+#include "main.h"
 #include "screen/api.hpp"
 
 void opcontrol()
 {
-  // make sure initializeStyles() happens or nothing will work!
+  // make sure   screen::resources::initialize() happens or nothing will work!
   // in this example it is called in initialize()
 
   // initialize and load a screen object

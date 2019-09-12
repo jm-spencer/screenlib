@@ -4,7 +4,7 @@
 
 #ifndef SCREEN_RESOURCES_HPP_
 #define SCREEN_RESOURCES_HPP_
-#include "main.h"
+#include "display/lvgl.h"
 
 extern lv_font_t smallFont;
 
@@ -67,7 +67,6 @@ extern lv_style_t blueZoneHighlighted;
  */
 
 void initialize();
-
 
 }  // namespace screen::resources
 
