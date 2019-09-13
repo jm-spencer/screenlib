@@ -1,6 +1,7 @@
-#ifndef SCREEN_FIELD_HPP_
-#define SCREEN_FIELD_HPP_
+#ifndef SCREEN_FIELD_TT_HPP_
+#define SCREEN_FIELD_TT_HPP_
 #include <vector>
+#include "screen/fields/baseField.hpp"
 #include "screen/resources.hpp"
 
 #define TOWER_CUBE_FAR 8
@@ -21,6 +22,33 @@
 #define CUBE_FAR_RIGHT 4
 #define CUBE_NEAR_LEFT 2
 #define CUBE_FAR_LEFT 1
+
+namespace screen {
+
+/**
+ * Various enums for the Tower Takeover field
+ */
+
+enum class color { none, orange, green, purple };
+
+enum class cubeGroup {
+  farLeft,
+  farRight,
+  farPurple,
+  left1,
+  left2,
+  left3,
+  left4,
+  right1,
+  right2,
+  right3,
+  right4,
+  near
+};
+
+enum class tower { left, right, center, far, near, red, blue };
+
+enum class scoringZone { farRed, farBlue, nearRed, nearBlue };
 
 /**
  * See Field.png on https://github.com/SpencerJ21/screenlib
@@ -64,9 +92,7 @@
  * printing a scored cube in that position
  */
 
-namespace screen {
-
-class Field {
+class ttField : public BaseField {
  public:
   /**
    * A struct that controls the drawing of numbers on cubes (which represent height)
@@ -90,52 +116,13 @@ class Field {
    *    use deltaX and deltaY to adjust the position of the number, and set a different
    *    style using fontStyle
    */
-  Field(lv_obj_t *parent, double ilength = 240, bool iautoInit = true,
-        NumberConfig iconfig = {1, -1, &littleWhiteText});
-  ~Field();
+  ttField(lv_obj_t *parent, double ilength = 240, bool iautoInit = true,
+          NumberConfig iconfig = {1, -1, &resources::littleWhiteText});
 
   /**
    * Remove all objects from the field, and reset to default
    */
-  void clean();
-
-  /**
-   * Set new x position of the field on the screen
-   *
-   * @param x new x-value of the distance from the leftmost side of the screen
-   *    (screen is 480 pixels wide)
-   */
-  void setX(int x);
-
-  /**
-   * Set new y position of the field on the screen
-   *
-   * @param y new y-value of the distance from the top side of the field
-   *    (screen is 240 pixels tall)
-   */
-  void setY(int y);
-
-  /**
-   * Set new position of the field on the screen
-   *
-   * note: the default(if this is never called) is 120,0 (centered)
-   *
-   * @param x new x-value of the distance from the leftmost side of the screen
-   *    (screen is 480 pixels wide)
-   * @param y new y-value of the distance from the top side of the field
-   *    (screen is 240 pixels tall)
-   */
-  void setPos(int x, int y);
-
-  /**
-   * Set the new width and height of the field
-   *
-   * this will clean the screen and remove all existing objects
-   *
-   * note: you can make the field larger than the screen,
-   *    but you would then need a way to move the screen around in order to see it
-   */
-  void setSideLength(uint ilength);
+  virtual void clean() override;
 
   /**
    * draw a group of cubes
@@ -231,12 +218,9 @@ class Field {
 
   void resetVectors();
 
-  const uint numOfBits[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
-
-  lv_obj_t *obj;
+  const uint8_t numOfBits[16] = {0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4};
 
   bool autoInit;
-  double scalar;
 
   bool wallDrawn;
   std::pair<color, color> allianceTowerContents;

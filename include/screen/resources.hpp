@@ -1,14 +1,14 @@
 /**
- * Contains the resources for printing the field
+ * Contains the resources (styles and fonts) for screenlib
  */
 
 #ifndef SCREEN_RESOURCES_HPP_
 #define SCREEN_RESOURCES_HPP_
-#include "main.h"
+#include "display/lvgl.h"
 
 extern lv_font_t smallFont;
 
-namespace screen {
+namespace screen::resources {
 
 /**
  * These styles are used for the objects on the field, along with
@@ -66,33 +66,8 @@ extern lv_style_t blueZoneHighlighted;
  * done with the screen, I suggest calling it in initialize()
  */
 
-void initializeStyles();
+void initialize();
 
-/**
- * Various enums for more readable parameters
- */
-
-enum class color { none, orange, green, purple };
-
-enum class cubeGroup {
-  farLeft,
-  farRight,
-  farPurple,
-  left1,
-  left2,
-  left3,
-  left4,
-  right1,
-  right2,
-  right3,
-  right4,
-  near
-};
-
-enum class tower { left, right, center, far, near, red, blue };
-
-enum class scoringZone { farRed, farBlue, nearRed, nearBlue };
-
-}  // namespace screen
+}  // namespace screen::resources
 
 #endif
