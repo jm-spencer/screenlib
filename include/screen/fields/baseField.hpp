@@ -6,7 +6,7 @@ namespace screen {
 
 class BaseField {
  public:
-   
+
   /**
    * Field generator for the screen
    *
@@ -48,6 +48,12 @@ class BaseField {
    *    (screen is 240 pixels tall)
    */
   void setPos(int x, int y);
+
+  /* Hide the field
+   *
+   * @param hide whether to hide the field
+   */
+  void hide(bool hide);
 
   /**
    * Set the new width and height of the field

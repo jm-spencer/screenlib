@@ -35,6 +35,11 @@ void BaseField::setPos(int x, int y)
   lv_obj_set_pos(obj, x, y);
 }
 
+void BaseField::hide(bool hide)
+{
+  lv_obj_set_hidden(obj, hide);
+}
+
 void BaseField::setSideLength(uint32_t ilength)
 {
   scalar = ilength / 240.0;
