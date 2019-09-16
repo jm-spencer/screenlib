@@ -1,6 +1,6 @@
 #include "screen/resources.hpp"
 
-namespace screen {
+namespace screen::resources {
 
 lv_style_t blankStyle;
 lv_style_t listStyle;
@@ -34,7 +34,7 @@ lv_style_t blueZone;
 lv_style_t redZoneHighlighted;
 lv_style_t blueZoneHighlighted;
 
-void initializeStyles()
+void initialize()
 {
   lv_style_copy(&blankStyle, &lv_style_plain);
   blankStyle.body.main_color   = LV_COLOR_GRAY;
