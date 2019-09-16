@@ -548,8 +548,8 @@ void Field::resetVectors()
   towersToDraw = {tower::left, tower::right, tower::center, tower::far,
                   tower::near, tower::red,   tower::blue};
 
-  zonesToDraw = {scoringZone::farRed,  scoringZone::farBlue, 
-                 scoringZone::nearRed, scoringZone::nearBlue};
+  zonesToDraw = {scoringZone::farRed, scoringZone::farBlue, scoringZone::nearRed,
+                 scoringZone::nearBlue};
 }
 
 }  // namespace screen
