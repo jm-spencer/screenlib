@@ -138,6 +138,13 @@ class Field {
   void setSideLength(uint ilength);
 
   /**
+   * Hide the field
+   *
+   * @param hide whether to hide the field
+   */
+  void hide(bool hide);
+
+  /**
    * draw a group of cubes
    *
    * @param pos which group of cubes to print - see resources.hpp
