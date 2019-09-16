@@ -64,11 +64,6 @@ void Field::setSideLength(uint ilength)
   clean();
 }
 
-void Field::hide(bool hide)
-{
-  lv_obj_set_hidden(obj, hide);
-}
-
 void Field::draw(const cubeGroup pos, const uint8_t presence)
 {
   bool targeted = presence != UINT8_MAX;
