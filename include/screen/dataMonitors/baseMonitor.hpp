@@ -17,6 +17,8 @@ public:
    */
   BaseMonitor(lv_obj_t *parent, std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
 
+  ~BaseMonitor();
+  
   /* Hide the monitor
    *
    * @param hide whether to hide the field

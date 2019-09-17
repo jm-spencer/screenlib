@@ -8,6 +8,10 @@ BaseMonitor::BaseMonitor(lv_obj_t *parent, std::shared_ptr<okapi::ControllerOutp
   obj = lv_cont_create(parent, NULL);
 }
 
+BaseMonitor::~BaseMonitor(){
+  lv_obj_del(obj);
+}
+
 void BaseMonitor::hide(bool hide)
 {
   lv_obj_set_hidden(obj, hide);
