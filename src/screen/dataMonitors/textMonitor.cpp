@@ -2,8 +2,11 @@
 
 namespace screen {
 
-TextMonitor::TextMonitor(lv_obj_t *parent, std::string icaption, std::string iunit, lv_style_t *captionStyle, lv_style_t *dataStyle, std::shared_ptr<okapi::ControllerOutput<double>> ioutput):
-  unit(iunit), BaseMonitor(parent, ioutput){
+TextMonitor::TextMonitor(lv_obj_t *parent, std::string icaption, std::string iunit,
+                         uint32_t ilength, lv_style_t *captionStyle, lv_style_t *dataStyle,
+                         std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
+    : unit(iunit), BaseMonitor(parent, ilength, ioutput)
+{
   lv_obj_set_style(obj, captionStyle);
 
   cap = lv_label_create(obj, NULL);
@@ -18,15 +21,17 @@ TextMonitor::TextMonitor(lv_obj_t *parent, std::string icaption, std::string iun
   lv_label_set_align(data, LV_LABEL_ALIGN_CENTER);
 }
 
-TextMonitor::~TextMonitor(){
+TextMonitor::~TextMonitor()
+{
   lv_obj_del(cap);
   lv_obj_del(data);
 }
 
-void TextMonitor::controllerSet(double ivalue){
+void TextMonitor::controllerSet(double ivalue)
+{
   lv_label_set_text(data, (std::to_string(ivalue) + unit).c_str());
 
   output->controllerSet(ivalue);
 }
 
-}
+}  // namespace screen

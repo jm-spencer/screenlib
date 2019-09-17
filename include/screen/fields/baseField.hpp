@@ -6,7 +6,6 @@ namespace screen {
 
 class BaseField {
  public:
-
   /**
    * Field generator for the screen
    *
@@ -32,7 +31,7 @@ class BaseField {
   /**
    * Set new y position of the field on the screen
    *
-   * @param y new y-value of the distance from the top side of the field
+   * @param y new y-value of the distance from the top side of the screen
    *    (screen is 240 pixels tall)
    */
   void setY(int y);
@@ -44,7 +43,7 @@ class BaseField {
    *
    * @param x new x-value of the distance from the leftmost side of the screen
    *    (screen is 480 pixels wide)
-   * @param y new y-value of the distance from the top side of the field
+   * @param y new y-value of the distance from the top side of the screen
    *    (screen is 240 pixels tall)
    */
   void setPos(int x, int y);
