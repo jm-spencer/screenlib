@@ -8,7 +8,7 @@ namespace screen {
 class TextMonitor : public BaseMonitor {
  public:
   TextMonitor(lv_obj_t *parent, std::string icaption = "", std::string iunit = "",
-              uint32_t ilength = 40, lv_style_t *captionStyle = &lv_style_plain,
+              lv_style_t *captionStyle = &lv_style_plain,
               lv_style_t *dataStyle = &lv_style_plain,
               std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
 

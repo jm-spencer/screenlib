@@ -3,9 +3,9 @@
 namespace screen {
 
 TextMonitor::TextMonitor(lv_obj_t *parent, std::string icaption, std::string iunit,
-                         uint32_t ilength, lv_style_t *captionStyle, lv_style_t *dataStyle,
+                         lv_style_t *captionStyle, lv_style_t *dataStyle,
                          std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
-    : unit(iunit), BaseMonitor(parent, ilength, ioutput)
+    : unit(iunit), BaseMonitor(parent, ioutput)
 {
   lv_obj_set_style(obj, captionStyle);
 

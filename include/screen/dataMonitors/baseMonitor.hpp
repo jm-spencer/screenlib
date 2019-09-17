@@ -15,8 +15,7 @@ class BaseMonitor : okapi::ControllerOutput<double> {
    * @param ilength the side length of the monitor
    * @param ioutput will passthrough the input value to this
    */
-  BaseMonitor(lv_obj_t *parent, uint32_t ilength,
-              std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
+  BaseMonitor(lv_obj_t *parent, std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
 
   ~BaseMonitor();
 
@@ -55,9 +54,19 @@ class BaseMonitor : okapi::ControllerOutput<double> {
   void hide(bool hide);
 
   /**
+   * Set the new width of the monitor
+   */
+  void setWidth(uint32_t iwidth);
+
+  /**
+   * Set the new height of the monitor
+   */
+  void setHeight(uint32_t iheight);
+
+  /**
    * Set the new width and height of the monitor
    */
-  void setSideLength(uint32_t ilength);
+  void setSize(uint32_t iwidth, uint32_t iheight);
 
   /**
    * Give the monitor its next value
@@ -72,7 +81,7 @@ class BaseMonitor : okapi::ControllerOutput<double> {
 
   lv_obj_t *obj;
 
-  double scalar;
+  double xScalar, yScalar;
 };
 
 }  // namespace screen

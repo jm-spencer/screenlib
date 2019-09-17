@@ -2,12 +2,10 @@
 
 namespace screen {
 
-BaseMonitor::BaseMonitor(lv_obj_t *parent, uint32_t ilength,
-                         std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
-    : output(ioutput), scalar(ilength / 40.0)
+BaseMonitor::BaseMonitor(lv_obj_t *parent, std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
+    : output(ioutput), xScalar(1), yScalar(1)
 {
   obj = lv_cont_create(parent, NULL);
-  lv_obj_set_size(obj, ilength, ilength);
 }
 
 BaseMonitor::~BaseMonitor()
@@ -35,10 +33,23 @@ void BaseMonitor::hide(bool hide)
   lv_obj_set_hidden(obj, hide);
 }
 
-void BaseMonitor::setSideLength(uint32_t ilength)
+void BaseMonitor::setWidth(uint32_t iwidth)
 {
-  lv_obj_set_size(obj, ilength, ilength);
-  scalar = ilength / 40.0;
+  lv_obj_set_width(obj, iwidth);
+  xScalar = iwidth / 480.0;
+}
+
+void BaseMonitor::setHeight(uint32_t iheight)
+{
+  lv_obj_set_height(obj, iheight);
+  yScalar = iheight / 240.0;
+}
+
+void BaseMonitor::setSize(uint32_t iwidth, uint32_t iheight)
+{
+  lv_obj_set_size(obj, iwidth, iheight);
+  xScalar = iwidth / 480.0;
+  yScalar = iheight / 240.0;
 }
 
 }  // namespace screen
