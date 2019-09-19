@@ -77,7 +77,7 @@ when changing size, if you are unsatisfied with the numbers printed on the cubes
 
 Example
 -------
-This directory (specifically [opcontrol.cpp](./src/opcontrol.cpp)) is a usage example (it produces the image at the top of this page)
+This directory (specifically [opcontrol()](./src/main.cpp)) is a usage example (it produces the image at the top of this page)
 
 Acknowledgements
 ================
