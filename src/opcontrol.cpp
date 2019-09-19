@@ -1,8 +1,10 @@
 #include "main.h"
 #include "screen/api.hpp"
+#include "screen/dataMonitors/textMonitor.hpp"
 
 void opcontrol()
 {
+  std::cout <<"start\n";
   // make sure   screen::resources::initialize() happens or nothing will work!
   // in this example it is called in initialize()
 
@@ -57,7 +59,18 @@ void opcontrol()
   // draw all objects not explicity defined here with their default settings
   field.finishDrawing();
 
+  screen::TextMonitor mon(scr, "I is", "cm");
+  mon.setPos(300, 0);
+  mon.setSize(60, 60);
+
+  double i = 1.2;
+
   while (true) {
-    pros::delay(1000);
+    i *= 1.01;
+
+    mon.controllerSet(i);
+
+    std::cout << "step\n";
+    pros::delay(100);
   }
 }

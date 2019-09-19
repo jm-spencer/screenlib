@@ -7,7 +7,7 @@ namespace screen {
 
 class TextMonitor : public BaseMonitor {
  public:
-  TextMonitor(lv_obj_t *parent, std::string icaption = "", std::string iunit = "",
+  TextMonitor(lv_obj_t *parent, const char *icaption = "", std::string iunit = "",
               lv_style_t *captionStyle = &lv_style_plain,
               lv_style_t *dataStyle = &lv_style_plain,
               std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
@@ -17,10 +17,13 @@ class TextMonitor : public BaseMonitor {
   virtual void controllerSet(double ivalue) override;
 
  private:
-  std::string unit;
+   virtual void align() override;
 
-  lv_obj_t *cap;
-  lv_obj_t *data;
+   std::string unit;
+   char dataBuffer[10];
+
+   lv_obj_t *cap;
+   lv_obj_t *data;
 };
 
 }  // namespace screen

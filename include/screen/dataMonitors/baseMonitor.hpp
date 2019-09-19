@@ -76,7 +76,9 @@ class BaseMonitor : okapi::ControllerOutput<double> {
    */
   virtual void controllerSet(double ivalue) = 0;
 
- protected:
+protected:
+  virtual void align() = 0;
+
   std::shared_ptr<okapi::ControllerOutput<double>> output{nullptr};
 
   lv_obj_t *obj;

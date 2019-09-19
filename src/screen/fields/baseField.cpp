@@ -7,7 +7,6 @@ BaseField::BaseField(lv_obj_t *parent, const double ilength) : scalar(ilength / 
   obj = lv_obj_create(parent, NULL);
   lv_obj_set_style(obj, &resources::fieldStyle);
   lv_obj_set_size(obj, ilength, ilength);
-  lv_obj_set_pos(obj, 120, 0);
 }
 
 BaseField::~BaseField()
