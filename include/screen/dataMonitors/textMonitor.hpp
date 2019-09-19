@@ -2,6 +2,7 @@
 #define TEXT_MONITOR_HPP_
 #include "screen/dataMonitors/baseMonitor.hpp"
 #include "screen/resources.hpp"
+#include <sstream>
 
 namespace screen {
 
@@ -16,11 +17,14 @@ class TextMonitor : public BaseMonitor {
 
   virtual void controllerSet(double ivalue) override;
 
+  void setPrecision(uint8_t iprec);
+
  private:
    virtual void align() override;
 
    std::string unit;
-   char dataBuffer[10];
+   std::stringstream dataStr;
+   uint8_t prec;
 
    lv_obj_t *cap;
    lv_obj_t *data;

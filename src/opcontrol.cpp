@@ -63,14 +63,14 @@ void opcontrol()
   mon.setPos(300, 0);
   mon.setSize(60, 60);
 
-  double i = 1.2;
+  double i = 1;
 
   while (true) {
-    i *= 1.01;
+    i ++;
 
     mon.controllerSet(i);
 
     std::cout << "step\n";
-    pros::delay(100);
+    pros::delay(500);
   }
 }
