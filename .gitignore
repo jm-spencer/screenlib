@@ -1,8 +1,17 @@
-.vscode/
+# Compiled Object files
+*.o
+*.obj
+*.zip
 
+# Executables
+*.bin
+*.elf
+
+# PROS
 bin/
-
+.vscode/
 compile_commands.json
 temp.log
-
-*.zip
+temp.errors
+*.ini
+.d/
