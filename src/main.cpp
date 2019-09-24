@@ -1,5 +1,6 @@
 #include "main.h"
 #include "screen/api.hpp"
+#include "screen/dataMonitors/textMonitor.hpp"
 
 void initialize() {
 	// this is very important, this MUST be run before anything else
@@ -67,7 +68,18 @@ void opcontrol() {
 	// draw all objects not explicity defined here with their default settings
 	field.finishDrawing();
 
-	while (true) {
-		pros::delay(1000);
-	}
+  screen::TextMonitor mon(scr, "I is", "cm");
+  mon.setPos(300, 0);
+  mon.setSize(60, 60);
+
+  double i = 1;
+
+  while (true) {
+    i ++;
+
+    mon.controllerSet(i);
+
+    std::cout << "step\n";
+    pros::delay(500);
+}
 }
