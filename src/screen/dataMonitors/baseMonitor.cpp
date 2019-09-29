@@ -36,26 +36,22 @@ void BaseMonitor::hide(bool hide)
 void BaseMonitor::setWidth(uint32_t iwidth)
 {
   lv_obj_set_width(obj, iwidth);
-  xScalar = iwidth / 480.0;
-
+  xScalar = iwidth / 100.0;
   align();
 }
 
 void BaseMonitor::setHeight(uint32_t iheight)
 {
   lv_obj_set_height(obj, iheight);
-  yScalar = iheight / 240.0;
-
+  yScalar = iheight / 100.0;
   align();
 }
 
 void BaseMonitor::setSize(uint32_t iwidth, uint32_t iheight)
 {
   lv_obj_set_size(obj, iwidth, iheight);
-  lv_obj_invalidate(obj);
-  xScalar = iwidth / 480.0;
-  yScalar = iheight / 240.0;
-
+  xScalar = iwidth / 100.0;
+  yScalar = iheight / 100.0;
   align();
 }
 

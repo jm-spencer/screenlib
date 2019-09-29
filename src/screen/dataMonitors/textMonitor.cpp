@@ -11,13 +11,13 @@ TextMonitor::TextMonitor(lv_obj_t *parent, const char *icaption, std::string iun
   lv_obj_set_style(obj, captionStyle);
 
   cap = lv_label_create(obj, NULL);
+  lv_label_set_long_mode(cap, LV_LABEL_LONG_CROP);
+  lv_label_set_align(cap, LV_LABEL_ALIGN_CENTER);
   lv_label_set_style(cap, captionStyle);
-  lv_label_set_align(cap, LV_LABEL_ALIGN_LEFT);
   lv_label_set_text(cap, icaption);
 
-  data = lv_label_create(obj, NULL);
+  data = lv_label_create(obj, cap);
   lv_obj_set_style(data, dataStyle);
-  lv_label_set_align(data, LV_LABEL_ALIGN_LEFT);
 
   align();
 }
@@ -42,8 +42,10 @@ void TextMonitor::setPrecision(uint8_t iprec){
 }
 
 void TextMonitor::align(){
-  lv_obj_align(cap, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
-  lv_obj_align(data, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 0, 0);
+  lv_obj_set_width(cap, 100 * xScalar);
+  lv_obj_align(cap, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
+  lv_obj_set_width(data, 100 * xScalar);
+  lv_obj_align(data, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
 }
 
 }  // namespace screen

@@ -1,10 +1,20 @@
 #include "main.h"
 #include "screen/api.hpp"
-#include "screen/dataMonitors/textMonitor.hpp"
+#include "screen/dataMonitors/textBarMonitor.hpp"
+
+lv_style_t tightBarStyle;
 
 void initialize() {
 	// this is very important, this MUST be run before anything else
   screen::resources::initialize();
+
+  lv_style_copy(&tightBarStyle, &lv_style_plain);
+  tightBarStyle.body.main_color = LV_COLOR_RED;
+  tightBarStyle.body.grad_color = LV_COLOR_RED;
+  tightBarStyle.body.padding.hor = 3;
+  tightBarStyle.body.padding.ver = 3;
+  tightBarStyle.body.radius = 0;
+  tightBarStyle.body.border.width = 0;
 }
 
 void disabled() {}
@@ -68,16 +78,19 @@ void opcontrol() {
 	// draw all objects not explicity defined here with their default settings
 	field.finishDrawing();
 
-  screen::TextMonitor mon(scr, "I is", "cm");
-  mon.setPos(300, 0);
+  screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, &lv_style_plain, &tightBarStyle, 10, 25);
+  screen::TextMonitor mon2(scr, "J is", "cm", &lv_style_plain_color, &tightBarStyle);
+  mon.setPos(240, 0);
   mon.setSize(60, 60);
-
+  mon2.setPos(240, 60);
+  mon2.setSize(60, 40);
   double i = 1;
 
   while (true) {
     i ++;
 
     mon.controllerSet(i);
+    mon2.controllerSet(2*i);
 
     std::cout << "step\n";
     pros::delay(500);

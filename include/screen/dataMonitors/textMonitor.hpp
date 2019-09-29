@@ -7,7 +7,7 @@
 namespace screen {
 
 class TextMonitor : public BaseMonitor {
- public:
+public:
   TextMonitor(lv_obj_t *parent, const char *icaption = "", std::string iunit = "",
               lv_style_t *captionStyle = &lv_style_plain,
               lv_style_t *dataStyle = &lv_style_plain,
@@ -19,7 +19,7 @@ class TextMonitor : public BaseMonitor {
 
   void setPrecision(uint8_t iprec);
 
- private:
+protected:
    virtual void align() override;
 
    std::string unit;
