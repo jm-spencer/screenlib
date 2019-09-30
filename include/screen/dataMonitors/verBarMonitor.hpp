@@ -9,8 +9,8 @@ namespace screen {
 class VerBarMonitor : public BaseMonitor {
 public:
   VerBarMonitor(lv_obj_t *parent, std::string iunit = "", double imin = 0, double imax = 100,
-                lv_style_t *style = &lv_style_plain_color,
-                uint16_t ibarWidth = 480,
+                uint16_t ibarWidth = 480, double barPadding = 0,
+                lv_style_t *bgStyle = &lv_style_transp, lv_style_t *indicStyle = &lv_style_pretty_color,
                 std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
 
   ~VerBarMonitor();

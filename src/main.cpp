@@ -82,7 +82,7 @@ void opcontrol() {
 
   screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, &lv_style_plain, &tightBarStyle, 10, 25);
   screen::TextMonitor mon2(scr, "J is", "cm", &lv_style_plain_color, &tightBarStyle);
-  screen::VerBarMonitor mon3(scr, "deg", 0, 100);
+  screen::VerBarMonitor mon3(scr, "", 0, 100, 240, 0.1);
   mon.setPos(240, 0);
   mon.setSize(60, 60);
   mon2.setPos(240, 60);
@@ -95,7 +95,7 @@ void opcontrol() {
     i ++;
 
     mon.controllerSet(i);
-    mon2.controllerSet(2*i);
+    mon2.controllerSet(i);
     mon3.controllerSet(i);
 
     std::cout << "step\n";
