@@ -1,6 +1,7 @@
 #include "main.h"
 #include "screen/api.hpp"
 #include "screen/dataMonitors/verBarMonitor.hpp"
+#include "screen/dataMonitors/horBarMonitor.hpp"
 
 lv_style_t tightBarStyle;
 
@@ -83,20 +84,25 @@ void opcontrol() {
   screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, 10, 25, &lv_style_plain, &tightBarStyle);
   screen::TextMonitor mon2(scr, "J is", "cm", &lv_style_plain_color, &tightBarStyle);
   screen::VerBarMonitor mon3(scr, "", 0, 100, 240, 0.1);
+  screen::HorBarMonitor mon4(scr, "=i but horizontal", 0, 100, 240, 0.1);
   mon.setPos(240, 0);
   mon.setSize(60, 60);
   mon2.setPos(240, 60);
   mon2.setSize(60, 40);
   mon3.setPos(300, 0);
-  mon3.setSize(60, 240);
+  mon3.setSize(60, 180);
+  mon4.setPos(240, 180);
+  mon4.setSize(240, 60);
   double i = 1;
 
   while (true) {
-    i ++;
+    if (i < 100) i++;
+    else i = 0;
 
     mon.controllerSet(i);
     mon2.controllerSet(i);
     mon3.controllerSet(i);
+    mon4.controllerSet(i);
 
     std::cout << "step\n";
     pros::delay(500);

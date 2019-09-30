@@ -1,7 +1,6 @@
 #include "screen/dataMonitors/verBarMonitor.hpp"
 #include <iomanip>
 #include <algorithm>
-#include <iostream>
 
 
 namespace screen {
@@ -27,7 +26,6 @@ VerBarMonitor::~VerBarMonitor(){
 }
 
 void VerBarMonitor::controllerSet(double ivalue){
-
   dataStr.str("");
   dataStr << std::setprecision(prec) << ivalue << unit;
   lv_label_set_text(data, dataStr.str().c_str());
@@ -35,7 +33,6 @@ void VerBarMonitor::controllerSet(double ivalue){
   lv_obj_set_height(bar, (std::clamp(ivalue, min, min + range) - min) * (100 * yScalar / range));
 
   align();
-
 
   if (output) output->controllerSet(ivalue);
 }
