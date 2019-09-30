@@ -1,6 +1,8 @@
 #ifndef TEXT_BAR_MONITOR_HPP_
 #define TEXT_BAR_MONITOR_HPP_
-#include "screen/dataMonitors/textMonitor.hpp"
+#include "screen/dataMonitors/baseMonitor.hpp"
+#include "screen/resources.hpp"
+#include <sstream>
 
 namespace screen {
 
