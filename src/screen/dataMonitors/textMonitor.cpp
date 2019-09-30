@@ -6,10 +6,8 @@ namespace screen {
 TextMonitor::TextMonitor(lv_obj_t *parent, const char *icaption, std::string iunit,
                          lv_style_t *captionStyle, lv_style_t *dataStyle,
                          std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
-    : unit(iunit), prec(3), BaseMonitor(parent, ioutput)
+    : unit(iunit), prec(3), BaseMonitor(parent, captionStyle, ioutput)
 {
-  lv_obj_set_style(obj, captionStyle);
-
   cap = lv_label_create(obj, NULL);
   lv_label_set_long_mode(cap, LV_LABEL_LONG_CROP);
   lv_label_set_align(cap, LV_LABEL_ALIGN_CENTER);

@@ -9,9 +9,7 @@ namespace screen {
 VerBarMonitor::VerBarMonitor(lv_obj_t *parent, std::string iunit, double imin, double imax, uint16_t ibarWidth, double barPadding,
                              lv_style_t *bgStyle, lv_style_t *indicStyle,
                              std::shared_ptr<okapi::ControllerOutput<double>> ioutput):
-                             unit(iunit), prec(3), barWidth(ibarWidth), min((1 + barPadding) * imin - (barPadding * imax)), range((1 + 2 *barPadding) * (imax - imin)), BaseMonitor(parent, ioutput){
-  lv_obj_set_style(obj, bgStyle);
-
+                             unit(iunit), prec(3), barWidth(ibarWidth), min((1 + barPadding) * imin - (barPadding * imax)), range((1 + 2 *barPadding) * (imax - imin)), BaseMonitor(parent, bgStyle, ioutput){
   bar = lv_obj_create(obj, NULL);
   lv_obj_set_style(bar, indicStyle);
   lv_obj_set_width(bar, barWidth);
@@ -35,8 +33,8 @@ void VerBarMonitor::controllerSet(double ivalue){
   lv_label_set_text(data, dataStr.str().c_str());
 
   lv_obj_set_height(bar, (std::clamp(ivalue, min, min + range) - min) * (100 * yScalar / range));
-  lv_obj_align(bar, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
-  lv_obj_align(data, bar, LV_ALIGN_IN_TOP_MID, 0, lv_obj_get_height(data) / -2);
+
+  align();
 
 
   if (output) output->controllerSet(ivalue);
@@ -48,7 +46,7 @@ void VerBarMonitor::setPrecision(uint8_t iprec){
 
 void VerBarMonitor::align(){
   lv_obj_align(bar, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
-  lv_obj_align(data, bar, LV_ALIGN_OUT_TOP_MID, 0, 0);
+  lv_obj_align(data, bar, LV_ALIGN_IN_TOP_MID, 0, lv_obj_get_height(data) / -2);
 }
 
 }

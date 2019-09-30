@@ -9,8 +9,8 @@ namespace screen {
 class TextBarMonitor : public BaseMonitor {
 public:
   TextBarMonitor(lv_obj_t *parent, const char *icaption = "", std::string iunit = "",
-                 double min = 0, double max = 100, lv_style_t *captionStyle = &lv_style_plain, lv_style_t *dataStyle = &lv_style_plain,
-                 uint16_t ianimTime = 0, double ibarSize = 25,
+                 double min = 0, double max = 100, uint16_t ianimTime = 0, double ibarSize = 25,
+                 lv_style_t *captionStyle = &lv_style_plain, lv_style_t *dataStyle = &lv_style_plain,
                  std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
 
   ~TextBarMonitor();
@@ -28,7 +28,7 @@ protected:
 
   lv_obj_t *cap;
   lv_obj_t *data;
-  lv_obj_t *bar; //will take 25% of element
+  lv_obj_t *bar;
 
   uint16_t animTime;
   double barSize;

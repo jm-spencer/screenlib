@@ -5,7 +5,7 @@
 lv_style_t tightBarStyle;
 
 void initialize() {
-  pros::delay(100);
+  pros::delay(50);
 
 	// this is very important, this MUST be run before anything else
   screen::resources::initialize();
@@ -80,7 +80,7 @@ void opcontrol() {
 	// draw all objects not explicity defined here with their default settings
 	field.finishDrawing();
 
-  screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, &lv_style_plain, &tightBarStyle, 10, 25);
+  screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, 10, 25, &lv_style_plain, &tightBarStyle);
   screen::TextMonitor mon2(scr, "J is", "cm", &lv_style_plain_color, &tightBarStyle);
   screen::VerBarMonitor mon3(scr, "", 0, 100, 240, 0.1);
   mon.setPos(240, 0);

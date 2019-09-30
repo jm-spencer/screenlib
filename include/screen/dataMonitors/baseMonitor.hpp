@@ -15,7 +15,7 @@ class BaseMonitor : okapi::ControllerOutput<double> {
    * @param ilength the side length of the monitor
    * @param ioutput will passthrough the input value to this
    */
-  BaseMonitor(lv_obj_t *parent, std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
+  BaseMonitor(lv_obj_t *parent, lv_style_t *bgStyle, std::shared_ptr<okapi::ControllerOutput<double>> ioutput);
 
   ~BaseMonitor();
 

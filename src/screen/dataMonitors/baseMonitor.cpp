@@ -2,10 +2,11 @@
 
 namespace screen {
 
-BaseMonitor::BaseMonitor(lv_obj_t *parent, std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
+BaseMonitor::BaseMonitor(lv_obj_t *parent, lv_style_t *style, std::shared_ptr<okapi::ControllerOutput<double>> ioutput)
     : output(ioutput), xScalar(1), yScalar(1)
 {
   obj = lv_cont_create(parent, NULL);
+  lv_obj_set_style(obj, style);
 }
 
 BaseMonitor::~BaseMonitor()
