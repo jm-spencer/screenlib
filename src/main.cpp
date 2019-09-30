@@ -83,14 +83,20 @@ void opcontrol() {
 
   screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, 10, 25, &lv_style_plain, &tightBarStyle);
   screen::TextMonitor mon2(scr, "J is", "cm", &lv_style_plain_color, &tightBarStyle);
-  //screen::VerBarMonitor mon3(scr, "", 0, 100, 240, 0.1);
+  screen::VerBarMonitor mon3(scr);
+    auto ent1 = mon3.makeEntry()->
+                withStyle(&lv_style_pretty)->
+                withBarWidth(50);
+    auto ent2 = mon3.makeEntry()->
+                withStyle(&tightBarStyle)->
+                withBarWidth(40);
   //screen::HorBarMonitor mon4(scr, "=i but horizontal", 0, 100, 240, 0.1);
   mon.setPos(240, 0);
   mon.setSize(60, 60);
   mon2.setPos(240, 60);
   mon2.setSize(60, 40);
-  //mon3.setPos(300, 0);
-  //mon3.setSize(60, 180);
+  mon3.setPos(300, 0);
+  mon3.setSize(60, 180);
   //mon4.setPos(240, 180);
   //mon4.setSize(240, 60);
   double i = 1;
@@ -101,7 +107,8 @@ void opcontrol() {
 
     mon.controllerSet(i);
     mon2.controllerSet(i);
-    //mon3.controllerSet(i);
+    ent1->controllerSet(i);
+    ent2->controllerSet(i * i * 0.01);
     //mon4.controllerSet(i);
 
     std::cout << "step\n";
