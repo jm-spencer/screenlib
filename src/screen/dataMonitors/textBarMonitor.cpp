@@ -8,7 +8,7 @@ TextBarMonitor::TextBarMonitor(lv_obj_t *parent, const char *icaption, std::stri
                                double min, double max, uint16_t ianimTime, double ibarSize,
                                lv_style_t *captionStyle, lv_style_t *dataStyle,
                                std::shared_ptr<okapi::ControllerOutput<double>> ioutput):
-    unit(iunit), prec(3), animTime(ianimTime), barSize(ibarSize), BaseMonitor(parent, captionStyle, ioutput){
+    unit(iunit), prec(3), animTime(ianimTime), barSize(ibarSize), SingleMonitor(parent, captionStyle, ioutput){
 
   cap = lv_label_create(obj, NULL);
   lv_label_set_long_mode(cap, LV_LABEL_LONG_CROP);

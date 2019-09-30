@@ -1,4 +1,4 @@
-#include "screen/dataMonitors/horBarMonitor.hpp"
+/*#include "screen/dataMonitors/horBarMonitor.hpp"
 #include <iomanip>
 #include <algorithm>
 
@@ -47,3 +47,4 @@ void HorBarMonitor::align(){
 }
 
 }
+*/

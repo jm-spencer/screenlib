@@ -1,12 +1,12 @@
 #ifndef TEXT_MONITOR_HPP_
 #define TEXT_MONITOR_HPP_
-#include "screen/dataMonitors/baseMonitor.hpp"
+#include "screen/dataMonitors/singleMonitor.hpp"
 #include "screen/resources.hpp"
 #include <sstream>
 
 namespace screen {
 
-class TextMonitor : public BaseMonitor {
+class TextMonitor : public SingleMonitor {
 public:
   TextMonitor(lv_obj_t *parent, const char *icaption = "", std::string iunit = "",
               lv_style_t *captionStyle = &lv_style_plain,

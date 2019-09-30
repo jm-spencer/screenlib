@@ -1,12 +1,12 @@
 #ifndef TEXT_BAR_MONITOR_HPP_
 #define TEXT_BAR_MONITOR_HPP_
-#include "screen/dataMonitors/baseMonitor.hpp"
+#include "screen/dataMonitors/singleMonitor.hpp"
 #include "screen/resources.hpp"
 #include <sstream>
 
 namespace screen {
 
-class TextBarMonitor : public BaseMonitor {
+class TextBarMonitor : public SingleMonitor {
 public:
   TextBarMonitor(lv_obj_t *parent, const char *icaption = "", std::string iunit = "",
                  double min = 0, double max = 100, uint16_t ianimTime = 0, double ibarSize = 25,

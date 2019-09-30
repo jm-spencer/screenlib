@@ -1,4 +1,4 @@
-#ifndef HOR_BAR_MONITOR_HPP_
+/*#ifndef HOR_BAR_MONITOR_HPP_
 #define HOR_BAR_MONITOR_HPP_
 #include "screen/dataMonitors/baseMonitor.hpp"
 #include "screen/resources.hpp"
@@ -36,3 +36,4 @@ protected:
 }
 
 #endif
+*/
