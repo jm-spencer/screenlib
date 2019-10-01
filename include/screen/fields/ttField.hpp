@@ -118,7 +118,7 @@ class ttField : public BaseField {
    */
   ttField(lv_obj_t *parent, double ilength = 240, bool iautoInit = true,
           NumberConfig iconfig = {2, -1, &resources::littleWhiteText});
-
+  
   /**
    * Remove all objects from the field, and reset to default
    */
