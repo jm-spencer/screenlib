@@ -1,4 +1,4 @@
-#include "screen/dataMonitors/textMonitor.hpp"
+#include "screen/dataMonitors/single/textMonitor.hpp"
 #include <iomanip>
 
 namespace screen {

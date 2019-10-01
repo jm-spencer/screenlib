@@ -1,7 +1,5 @@
 #include "main.h"
 #include "screen/api.hpp"
-#include "screen/dataMonitors/verBarMonitor.hpp"
-#include "screen/dataMonitors/horBarMonitor.hpp"
 
 lv_style_t tightBarStyle;
 

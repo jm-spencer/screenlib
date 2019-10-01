@@ -6,8 +6,10 @@
 #include "fields/baseField.hpp"
 #include "fields/ttField.hpp"
 
-#include "dataMonitors/textMonitor.hpp"
-#include "dataMonitors/textBarMonitor.hpp"
-//#include "dataMonitors/textMonitor.hpp"
+#include "dataMonitors/single/textMonitor.hpp"
+#include "dataMonitors/single/textBarMonitor.hpp"
+
+#include "dataMonitors/multi/verBarMonitor.hpp"
+#include "dataMonitors/multi/horBarMonitor.hpp"
 
 #endif

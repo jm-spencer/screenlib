@@ -1,4 +1,4 @@
-#include "screen/dataMonitors/textBarMonitor.hpp"
+#include "screen/dataMonitors/single/textBarMonitor.hpp"
 #include <iomanip>
 #include <iostream>
 

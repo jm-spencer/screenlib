@@ -1,6 +1,6 @@
 #ifndef TEXT_BAR_MONITOR_HPP_
 #define TEXT_BAR_MONITOR_HPP_
-#include "screen/dataMonitors/singleMonitor.hpp"
+#include "screen/dataMonitors/single/singleMonitor.hpp"
 #include "screen/resources.hpp"
 #include <sstream>
 

@@ -1,4 +1,4 @@
-#include "screen/dataMonitors/verBarMonitor.hpp"
+#include "screen/dataMonitors/multi/verBarMonitor.hpp"
 #include <iomanip>
 #include <algorithm>
 
