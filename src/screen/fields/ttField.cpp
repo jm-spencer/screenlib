@@ -499,7 +499,7 @@ void ttField::drawCube(lv_obj_t *parent, const std::pair<uint8_t, uint8_t> pos, 
   if (stackHeight > 1) {
     lv_obj_t *cubeLabel = lv_label_create(cube, NULL);
     lv_label_set_style(cubeLabel, config.fontStyle);
-    lv_obj_align(cubeLabel, NULL, LV_ALIGN_CENTER, config.deltaX, config.deltaY);
+    lv_obj_align(cubeLabel, NULL, LV_ALIGN_IN_LEFT_MID, config.deltaX, config.deltaY);
     lv_label_set_align(cubeLabel, LV_LABEL_ALIGN_CENTER);
     lv_label_set_text(cubeLabel, std::to_string(stackHeight).c_str());
   }

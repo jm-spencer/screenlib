@@ -1,9 +1,23 @@
 #include "main.h"
 #include "screen/api.hpp"
+#include "screen/dataMonitors/verBarMonitor.hpp"
+#include "screen/dataMonitors/horBarMonitor.hpp"
+
+lv_style_t tightBarStyle;
 
 void initialize() {
+  pros::delay(50);
+
 	// this is very important, this MUST be run before anything else
   screen::resources::initialize();
+
+  lv_style_copy(&tightBarStyle, &lv_style_plain);
+  tightBarStyle.body.main_color = LV_COLOR_RED;
+  tightBarStyle.body.grad_color = LV_COLOR_RED;
+  tightBarStyle.body.padding.hor = 3;
+  tightBarStyle.body.padding.ver = 3;
+  tightBarStyle.body.radius = 0;
+  tightBarStyle.body.border.width = 0;
 }
 
 void disabled() {}
@@ -67,7 +81,30 @@ void opcontrol() {
 	// draw all objects not explicity defined here with their default settings
 	field.finishDrawing();
 
-	while (true) {
-		pros::delay(1000);
-	}
+  screen::TextBarMonitor mon(scr, "I is", "cm", 0, 100, 10, 25, &lv_style_plain, &tightBarStyle);
+  screen::TextMonitor mon2(scr, "J is", "cm", &lv_style_plain_color, &tightBarStyle);
+  screen::VerBarMonitor mon3(scr, "", 0, 100, 240, 0.1);
+  screen::HorBarMonitor mon4(scr, "=i but horizontal", 0, 100, 240, 0.1);
+  mon.setPos(240, 0);
+  mon.setSize(60, 60);
+  mon2.setPos(240, 60);
+  mon2.setSize(60, 40);
+  mon3.setPos(300, 0);
+  mon3.setSize(60, 180);
+  mon4.setPos(240, 180);
+  mon4.setSize(240, 60);
+  double i = 1;
+
+  while (true) {
+    if (i < 100) i++;
+    else i = 0;
+
+    mon.controllerSet(i);
+    mon2.controllerSet(i);
+    mon3.controllerSet(i);
+    mon4.controllerSet(i);
+
+    std::cout << "step\n";
+    pros::delay(500);
+}
 }
