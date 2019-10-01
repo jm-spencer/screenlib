@@ -1,15 +1,11 @@
 #ifndef HOR_BAR_MONITOR_HPP_
 #define HOR_BAR_MONITOR_HPP_
-#include "okapi/api/control/controllerOutput.hpp"
-#include "screen/util/baseObject.hpp"
-#include "screen/resources.hpp"
+#include "screen/dataMonitors/multi/multiMonitor.hpp"
 #include <sstream>
-#include <memory>
-#include <vector>
 
 namespace screen {
 
-class HorBarEntry : okapi::ControllerOutput<double> {
+class HorBarEntry : public MonitorEntry {
 public:
   HorBarEntry(lv_obj_t *ibar, lv_obj_t *idata);
 
@@ -42,24 +38,19 @@ protected:
 
   lv_obj_t *bar{nullptr};
   lv_obj_t *data{nullptr};
-
-  std::shared_ptr<okapi::ControllerOutput<double>> output{nullptr};
 };
 
 
 
-class HorBarMonitor : public BaseObject {
+class HorBarMonitor : public MultiMonitor<HorBarEntry> {
 public:
   HorBarMonitor(lv_obj_t *parent, lv_style_t *bgStyle = &lv_style_transp);
 
   ~HorBarMonitor();
 
-  HorBarEntry *makeEntry();
+  virtual HorBarEntry *makeEntry() override;
 
   virtual void align() override;
-
-protected:
-   std::vector<HorBarEntry *> entries;
 
 };
 

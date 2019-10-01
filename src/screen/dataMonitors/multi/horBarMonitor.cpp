@@ -73,7 +73,7 @@ void HorBarEntry::align(){
 
 
 HorBarMonitor::HorBarMonitor(lv_obj_t *parent, lv_style_t *bgStyle):
-    BaseObject(parent, bgStyle){}
+    MultiMonitor(parent, bgStyle){}
 
 HorBarMonitor::~HorBarMonitor(){
   for (auto ent : entries){

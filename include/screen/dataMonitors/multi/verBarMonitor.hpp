@@ -1,15 +1,11 @@
 #ifndef VER_BAR_MONITOR_HPP_
 #define VER_BAR_MONITOR_HPP_
-#include "okapi/api/control/controllerOutput.hpp"
-#include "screen/util/baseObject.hpp"
-#include "screen/resources.hpp"
+#include "screen/dataMonitors/multi/multiMonitor.hpp"
 #include <sstream>
-#include <memory>
-#include <vector>
 
 namespace screen {
 
-class VerBarEntry : okapi::ControllerOutput<double> {
+class VerBarEntry : public MonitorEntry {
 public:
   VerBarEntry(lv_obj_t *ibar, lv_obj_t *idata);
 
@@ -42,25 +38,19 @@ protected:
 
   lv_obj_t *bar{nullptr};
   lv_obj_t *data{nullptr};
-
-  std::shared_ptr<okapi::ControllerOutput<double>> output{nullptr};
 };
 
 
 
-class VerBarMonitor : public BaseObject {
+class VerBarMonitor : public MultiMonitor<VerBarEntry> {
 public:
   VerBarMonitor(lv_obj_t *parent, lv_style_t *bgStyle = &lv_style_transp);
 
   ~VerBarMonitor();
 
-  VerBarEntry *makeEntry();
+  virtual VerBarEntry *makeEntry() override;
 
   virtual void align() override;
-  
-protected:
-   std::vector<VerBarEntry *> entries;
-
 };
 
 }

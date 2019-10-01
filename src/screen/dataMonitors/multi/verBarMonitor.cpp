@@ -73,7 +73,7 @@ void VerBarEntry::align(){
 
 
 VerBarMonitor::VerBarMonitor(lv_obj_t *parent, lv_style_t *bgStyle):
-    BaseObject(parent, bgStyle){}
+    MultiMonitor(parent, bgStyle){}
 
 VerBarMonitor::~VerBarMonitor(){
   for (auto ent : entries){
