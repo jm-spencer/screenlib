@@ -66,9 +66,13 @@ class BaseObject {
    */
   void setSize(uint32_t iwidth, uint32_t iheight);
 
-protected:
+  /**
+   * realign all children's objects to their proper position
+   * automatically called after resizing
+   */
   virtual void align() = 0;
 
+protected:
   lv_obj_t *obj;
 
   double xScalar, yScalar;

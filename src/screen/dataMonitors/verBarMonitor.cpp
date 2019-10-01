@@ -52,10 +52,6 @@ VerBarEntry *VerBarEntry::withOutput(std::shared_ptr<okapi::ControllerOutput<dou
   return this;
 }
 
-void VerBarEntry::setYScalar(double iyScalar){
-
-}
-
 void VerBarEntry::controllerSet(double ivalue){
   dataStr.str("");
   dataStr << std::setprecision(prec) << ivalue << unit;
@@ -89,7 +85,8 @@ VerBarEntry *VerBarMonitor::makeEntry(){
   auto out = new VerBarEntry(
     lv_obj_create(obj, NULL), lv_label_create(obj, NULL)
   );
-  out->setYScalar(yScalar);
+
+  out->align();
 
   entries.push_back(out);
   return out;
@@ -97,7 +94,7 @@ VerBarEntry *VerBarMonitor::makeEntry(){
 
 void VerBarMonitor::align(){
   for (auto ent : entries){
-    ent->setYScalar(yScalar);
+    ent->align();
   }
 }
 

@@ -29,13 +29,11 @@ public:
 
   VerBarEntry *withOutput(std::shared_ptr<okapi::ControllerOutput<double>> ioutput);
 
-  void setYScalar(double iyScalar);
-
   virtual void controllerSet(double ivalue) override;
 
-protected:
   void align();
 
+protected:
   std::string unit{""};
   std::stringstream dataStr;
   uint8_t prec{3};
@@ -58,9 +56,9 @@ public:
 
   VerBarEntry *makeEntry();
 
+  virtual void align() override;
+  
 protected:
-   virtual void align() override;
-
    std::vector<VerBarEntry *> entries;
 
 };

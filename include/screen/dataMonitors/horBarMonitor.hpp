@@ -1,39 +1,68 @@
-/*#ifndef HOR_BAR_MONITOR_HPP_
+#ifndef HOR_BAR_MONITOR_HPP_
 #define HOR_BAR_MONITOR_HPP_
-#include "screen/dataMonitors/baseMonitor.hpp"
+#include "okapi/api/control/controllerOutput.hpp"
+#include "screen/util/baseObject.hpp"
 #include "screen/resources.hpp"
 #include <sstream>
+#include <memory>
+#include <vector>
 
 namespace screen {
 
-class HorBarMonitor : public BaseMonitor {
+class HorBarEntry : okapi::ControllerOutput<double> {
 public:
-  HorBarMonitor(lv_obj_t *parent, std::string iunit = "", double imin = 0, double imax = 100,
-                uint16_t ibarHeight = 240, double barPadding = 0,
-                lv_style_t *bgStyle = &lv_style_transp, lv_style_t *indicStyle = &lv_style_pretty_color,
-                std::shared_ptr<okapi::ControllerOutput<double>> ioutput = nullptr);
+  HorBarEntry(lv_obj_t *ibar, lv_obj_t *idata);
 
-  ~HorBarMonitor();
+  ~HorBarEntry();
+
+  HorBarEntry *withPrecision(uint8_t iprec);
+
+  HorBarEntry *withUnit(std::string iunit);
+
+  HorBarEntry *withBounds(double imin, double imax);
+
+  HorBarEntry *withBarHeight(uint16_t iheight);
+
+  HorBarEntry *withBarPadding(double ipadding);
+
+  HorBarEntry *withStyle(lv_style_t *style);
+
+  HorBarEntry *withOutput(std::shared_ptr<okapi::ControllerOutput<double>> ioutput);
 
   virtual void controllerSet(double ivalue) override;
 
-  void setPrecision(uint8_t iprec);
+  void align();
+
 protected:
-   virtual void align() override;
+  std::string unit{""};
+  std::stringstream dataStr;
+  uint8_t prec{3};
 
-   std::string unit;
-   std::stringstream dataStr;
-   uint8_t prec;
+  double min{0}, range{100}, padding{0};
 
-   uint16_t barHeight;
+  lv_obj_t *bar{nullptr};
+  lv_obj_t *data{nullptr};
 
-   double min, range;
+  std::shared_ptr<okapi::ControllerOutput<double>> output{nullptr};
+};
 
-   lv_obj_t *bar;
-   lv_obj_t *data;
+
+
+class HorBarMonitor : public BaseObject {
+public:
+  HorBarMonitor(lv_obj_t *parent, lv_style_t *bgStyle = &lv_style_transp);
+
+  ~HorBarMonitor();
+
+  HorBarEntry *makeEntry();
+
+  virtual void align() override;
+
+protected:
+   std::vector<HorBarEntry *> entries;
+
 };
 
 }
 
 #endif
-*/
