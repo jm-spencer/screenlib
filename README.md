@@ -1,3 +1,7 @@
+Note
+====
+This library has been retired. The initial planned scope of this project kinda fell apart and I've lost interest in this kind of gimmicky library. Maybe you'll find some part of this code useful, but there are no plans for any more updates.
+
 ScreenLib
 =========
 ScreenLib is a PROS library that handles screen drawing functions,
